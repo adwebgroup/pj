@@ -1,0 +1,11 @@
+.search-frame {
+  top:44px;
+}
+#mainView #baidu-map-api {
+  width:100%;
+  top:88px;
+  bottom:49px;
+  position: absolute;
+}
+
+

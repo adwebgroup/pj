@@ -1,0 +1,38 @@
+#items-list-slide{
+  bottom:47px;
+  top:0;
+  position: absolute;
+  width: 100%;
+}
+
+#items-list-slide .left-frame{
+  top:88px;
+  bottom:49px;
+  width:100%;
+  position: absolute;
+  background-color: #fff;
+}
+
+#items-list-slide .slide-bar{
+  bottom:0px;
+  position: absolute;
+  background-color: #fff;
+}
+
+#items-list-slide .slider {
+  height: 100%;
+}
+#items-list-slide .slider-slide {
+  background-color: #fff;
+  text-align: center;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+#items-list-slide .box {
+  background-color: #fff;
+  height: 100%;
+}
+#items-list-slide .slider-slide > div > h2{
+  color: #888;
+}/* Empty. Add your own CSS if you like */
