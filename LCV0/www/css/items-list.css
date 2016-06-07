@@ -1,6 +1,6 @@
 #items-list-slide{
-  bottom:47px;
-  top:0;
+  bottom:94px;
+  top:88px;
   position: absolute;
   width: 100%;
 }
@@ -13,8 +13,8 @@
   background-color: #fff;
 }
 
-#items-list-slide .slide-bar{
-  bottom:0px;
+.slide-bar{
+  bottom:49px;
   position: absolute;
   background-color: #fff;
 }
@@ -36,3 +36,4 @@
 #items-list-slide .slider-slide > div > h2{
   color: #888;
 }/* Empty. Add your own CSS if you like */
+

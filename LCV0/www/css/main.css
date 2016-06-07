@@ -9,3 +9,27 @@
 }
 
 
+.tabs-view{
+	
+	height: 49px;
+	bottom: 0px;
+	position: absolute;
+}
+
+#info-frame{
+	left: 10px;
+	right: 10px;
+	width: auto;
+	height: 0;
+	transition:height 0.4s;
+	background-color: transparent;
+	bottom: 0;
+}
+
+.view-container{
+	background-color: white;
+}
+
+ion-nav-view, body, .pane{
+	background-color: transparent;
+}
