@@ -4,7 +4,8 @@ function initialize() {
 	map.centerAndZoom(point, 12);
 	map.addControl(new BMap.NavigationControl());
 	map.addControl(new BMap.ScaleControl());
-
+	map.enableScrollWheelZoom(true);
+	
 }
 
 function loadScript() {

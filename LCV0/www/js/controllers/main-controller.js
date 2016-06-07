@@ -64,8 +64,19 @@ angular.module('app.main-controller', [])
     	}
     }	
     	
+    $scope.filterExpand = function(){
+    	var div1 = document.getElementById('filter-frame');
+    	
+    	
+		div1.style.height= "200px";
+    }
 
-
+    $scope.filterClose = function(){
+    	var div1 = document.getElementById('filter-frame');
+    	console.log("clickedTab")
+    	
+		div1.style.height= "0";
+    }
     	
     
     
