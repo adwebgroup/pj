@@ -17,15 +17,14 @@
 }
 
 #info-frame{
-	left: 10px;
-	right: 10px;
-	width: auto;
+	
+	width: 100%;
 	height: 0;
 	transition:height 0.4s;
 	background-color: transparent;
 	opacity: 0.95;
 	bottom: 0;
-	box-shadow: 0 0 10px #888;
+	overflow: all;
 }
 
 .view-container{
@@ -34,4 +33,11 @@
 
 ion-nav-view, body, .pane{
 	background-color: transparent;
+}
+
+#info-frame > div > div{
+	left: 10px;
+	right: 10px;
+	width: auto;
+	box-shadow: 0 0 10px #888;
 }
