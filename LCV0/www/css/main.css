@@ -23,7 +23,9 @@
 	height: 0;
 	transition:height 0.4s;
 	background-color: transparent;
+	opacity: 0.95;
 	bottom: 0;
+	box-shadow: 0 0 10px #888;
 }
 
 .view-container{
