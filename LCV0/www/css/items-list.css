@@ -37,3 +37,11 @@
   color: #888;
 }/* Empty. Add your own CSS if you like */
 
+.card-list{
+  top: 44px;
+  bottom: 0px;
+  position: absolute;
+  overflow-y: scroll;
+  width: 100%;
+
+}
