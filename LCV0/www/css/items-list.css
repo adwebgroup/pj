@@ -1,11 +1,10 @@
-#items-list-slide{
-  bottom:94px;
-  top:88px;
+.list-frame{
+  
   position: absolute;
   width: 100%;
 }
 
-#items-list-slide .left-frame{
+.list-frame .left-frame{
   top:88px;
   bottom:49px;
   width:100%;
@@ -19,33 +18,32 @@
   background-color: #fff;
 }
 
-#items-list-slide .slider {
+.list-frame .slider {
   height: 100%;
 }
-#items-list-slide .slider-slide {
+.list-frame .slider-slide {
   background-color: #fff;
   text-align: center;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
 
-#items-list-slide .box {
+.list-frame .box {
   background-color: #fff;
   height: 100%;
 }
-#items-list-slide .slider-slide > div > h2{
+.list-frame .slider-slide > div > h2{
   color: #888;
 }/* Empty. Add your own CSS if you like */
 
-.card-list{
-  top: 44px;
-  bottom: 0px;
-  position: absolute;  
-  width: 100%;
-
+#history-item-list{
+  background-color: #fff;
+  bottom:49px;
+  top:88px;
+  
 }
 
-.scroll-view.scroll-y {
-    overflow-x: hidden;
-    overflow-y: hidden;
+#item-list{
+  bottom:94px;
+  top:88px;
 }

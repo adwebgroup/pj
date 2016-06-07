@@ -21,11 +21,19 @@ angular.module('app.main-controller', [])
     			clickedTab = -1;
     		}
     		else{
-    			div1.style.height = "100%";
+    			
     			clickedTab = index;
     			switch (index){
     				case 0:
     					window.location.href = "#/main/list";
+    					div1.style.height = "100%";
+    					break;
+    				case 2:
+    					window.location.href = "#/main/history";
+    					div1.style.height = "100%";
+    					break;
+    				default:
+    					div1.style.height = "50%";
     					break;
     			}
     		}

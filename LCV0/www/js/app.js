@@ -73,6 +73,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.history', {
+      url:"/history",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/history-list.html'
+        }
+      }
+    })
   ;
 
   // if none of the above states are matched, use this as the fallback

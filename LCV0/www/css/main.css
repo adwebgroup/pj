@@ -41,3 +41,16 @@ ion-nav-view, body, .pane{
 	width: auto;
 	box-shadow: 0 0 10px #888;
 }
+
+.card-list{
+  top: 44px;
+  bottom: 0px;
+  position: absolute;  
+  width: 100%;
+
+}
+
+.scroll-view.scroll-y {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
