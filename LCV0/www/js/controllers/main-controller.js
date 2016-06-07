@@ -10,7 +10,11 @@ angular.module('app.main-controller', [])
 
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
     $scope.leftSide = function() {
-    	$ionicSideMenuDelegate.toggleLeft();
+    	$ionicSideMenuDelegate.toggleLeft(true);
+    	if ($ionicSideMenuDelegate.isOpen()) {
+    		$ionicSideMenuDelegate.toggleLeft();
+    	}
+    	$ionicSideMenuDelegate.canDragContent(false);
     	window.location.href = "#/main/mainlist";
     };
     $scope.itemClick = function(index) {
@@ -50,7 +54,15 @@ angular.module('app.main-controller', [])
     	
     };
     
-    	
+    $scope.closeItemList = function(){
+    	if ($ionicSideMenuDelegate.isOpen()) {
+    		$ionicSideMenuDelegate.toggleLeft();
+    	}else{
+    		var div1 = document.getElementById('info-frame');
+    		div1.style.height = "0";
+    		clickedTab = -1;
+    	}
+    }	
     	
 
 
