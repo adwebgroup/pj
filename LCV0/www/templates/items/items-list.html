@@ -9,26 +9,12 @@
           </ion-header-bar>
           <ion-scroll class="card-list" direction="y">
           <div>
-            <div class="card">
-              <div class="item item-text-wrap">
-                我是景点1
+            <div class="card" ng-repeat="item in itemList">
+              <div class="item item-text-wrap" ng-click="showItem(item)">
+                {{item.text}}
               </div>
             </div>
-            <div class="card">
-              <div class="item item-text-wrap">
-                我是景点2
-              </div>
-            </div>
-            <div class="card">
-              <div class="item item-text-wrap">
-                我是景点3
-              </div>
-            </div>
-            <div class="card">
-              <div class="item item-text-wrap">
-                我是名字超他妈长的景点4你说我是不是特别屌啊哈哈哈哈
-              </div>
-            </div>
+            
           </div>
           </ion-scroll>
         </div>

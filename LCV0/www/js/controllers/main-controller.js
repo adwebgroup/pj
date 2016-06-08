@@ -74,8 +74,21 @@ angular.module('app.main-controller', [])
 		div1.style.height= "0";
     }
     	
+    $scope.itemList = [
+    	{ text: "复旦大学", x: "121.51", y: "31.302"},
+    	{ text: "同济大学", x: "121.513", y: "31.288"},
+    	{ text: "我是景点3", x: "121.513", y: "31.288"},
+    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288"}
+    ];
     
-    
+	$scope.showItem = function(item){
+		var map = new BMap.Map('baidu-map-api');
+		var point = new BMap.Point(item.x, item.y);
+		map.centerAndZoom(point, 15);
+		var marker = new BMap.Marker(point);
+		map.addOverlay(marker);
+	}
+
   })
 ;
 
