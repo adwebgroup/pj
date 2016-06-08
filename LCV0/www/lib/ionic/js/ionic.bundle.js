@@ -2705,7 +2705,7 @@ var TAP_RELEASE_TOLERANCE = 12; // default tolerance
 var TAP_RELEASE_BUTTON_TOLERANCE = 50; // button elements should have a larger tolerance
 
 var tapEventListeners = {
-  //'click': tapClickGateKeeper,
+  'click': tapClickGateKeeper,
 
   'mousedown': tapMouseDown,
   'mouseup': tapMouseUp,
@@ -2952,7 +2952,7 @@ function triggerMouseEvent(type, ele, x, y) {
   clickEvent.isIonicTap = true;
   ele.dispatchEvent(clickEvent);
 }
-/*
+
 function tapClickGateKeeper(e) {
   //console.log('click ' + Date.now() + ' isIonicTap: ' + (e.isIonicTap ? true : false));
   if (e.target.type == 'submit' && e.detail === 0) {
@@ -2973,7 +2973,7 @@ function tapClickGateKeeper(e) {
     return false;
   }
 }
-*/
+
 // MOUSE
 function tapMouseDown(e) {
   //console.log('mousedown ' + Date.now());

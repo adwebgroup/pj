@@ -50,7 +50,7 @@ angular.module('app', ['ionic', 'app.main-controller'])
 
     .state('main',{
       url:"/main",
-      abstract: true,
+      //abstract: true,
       templateUrl: "templates/main.html",
       controller: 'mainCtrl'
         

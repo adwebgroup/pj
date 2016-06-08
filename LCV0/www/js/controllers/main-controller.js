@@ -4,21 +4,22 @@
 
 
 var clickedTab = -1;
-var clickCount = 0;
 
 angular.module('app.main-controller', [])
 
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
+    //$ionicSideMenuDelegate.canDragContent(false);
     $scope.leftSide = function() {
+    	
     	$ionicSideMenuDelegate.toggleLeft(true);
     	if ($ionicSideMenuDelegate.isOpen()) {
     		$ionicSideMenuDelegate.toggleLeft();
     	}
-    	$ionicSideMenuDelegate.canDragContent(false);
+    	
     	window.location.href = "#/main/mainlist";
     };
     $scope.itemClick = function(index) {
-    	if(clickCount == 0){
+    	
     		var div1 = document.getElementById('info-frame');
     		if(clickedTab == index){
     			div1.style.height = "0";
@@ -41,11 +42,7 @@ angular.module('app.main-controller', [])
     					break;
     			}
     		}
-    		clickCount = 1;
-    	}
-    	else{
-    		clickCount = 0;
-    	}
+    		
 
 
     	
@@ -67,13 +64,12 @@ angular.module('app.main-controller', [])
     $scope.filterExpand = function(){
     	var div1 = document.getElementById('filter-frame');
     	
-    	
 		div1.style.height= "200px";
     }
 
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
-    	console.log("clickedTab")
+    	
     	
 		div1.style.height= "0";
     }
