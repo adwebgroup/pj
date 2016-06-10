@@ -1,0 +1,38 @@
+#item-overview{
+  background-color: #fff;
+  bottom:94px;
+  top:88px;
+}
+
+.red-star, .grey-star{
+	width: 12px;
+	height: 12px;
+	
+	text-align: center;
+	border-radius: 3px;
+	margin: 1px;
+	line-height: 7px;
+	float: right;
+}
+
+.ion-ios-star{
+	color: white;
+	font-size: 10px;
+}
+
+.red-star{
+	background-color: #ef473a;
+
+}
+
+.grey-star{
+	background-color: #ddd;
+
+}
+
+.percentage{
+	width: 66%;
+	background-color: #ef473a;
+	height: 100%;
+	color: white;
+}

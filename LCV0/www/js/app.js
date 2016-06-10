@@ -73,6 +73,15 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+
+    .state('main.overview', {
+      url:"/overview",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/item-overview.html'
+        }
+      }
+    })
     .state('main.history', {
       url:"/history",
       views:{
