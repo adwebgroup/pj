@@ -6,10 +6,12 @@
 var clickedTab = -1;
 var itemExpanded = 0;
 
+
 angular.module('app.main-controller', [])
 
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
     //$ionicSideMenuDelegate.canDragContent(false);
+    
     $scope.leftSide = function() {
     	
     	$ionicSideMenuDelegate.toggleLeft(true);
@@ -19,6 +21,7 @@ angular.module('app.main-controller', [])
     	
     	window.location.href = "#/main/mainlist";
     };
+
     $scope.itemClick = function(index) {
     	
     		var div1 = document.getElementById('info-frame');
@@ -99,6 +102,11 @@ angular.module('app.main-controller', [])
     	}
 		
     }
+    $scope.itemReturn = function(){
+    	var div1 = document.getElementById('info-frame');
+    	window.location.href = "#/main/list";
+    	div1.style.height = "100%";
+    }
 
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
@@ -108,23 +116,23 @@ angular.module('app.main-controller', [])
     }
     	
     $scope.itemList = [[
-    	{ text: "复旦大学", x: "121.51", y: "31.302", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"},
-    	{ text: "同济大学", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"},
-    	{ text: "交通大学", x: "121.44", y: "31.208", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"},
-    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"}
+    	{ text: "复旦大学", x: "121.51", y: "31.302", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"},
+    	{ text: "同济大学", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"},
+    	{ text: "交通大学", x: "121.44", y: "31.208", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"},
+    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"}
     ],
     [
-    	{ text: "复旦大学", x: "121.51", y: "31.302", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"}
+    	{ text: "复旦大学", x: "121.51", y: "31.302", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"}
     ],
     	
     [
     	
-    	{ text: "同济大学", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"}
+    	{ text: "同济大学", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"}
     	
     ],
     [
     	
-    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674"}
+    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288", s5: "3964", s4:"1930", s3:"584", s2:"119", s1:"77", ssum:"6674", score:"4.4"}
     ]
 
     ];
@@ -143,11 +151,36 @@ angular.module('app.main-controller', [])
 		map.enableScrollWheelZoom(true);
 		var marker = new BMap.Marker(point);
 		map.addOverlay(marker);
-
+		$scope.selectItem = item;
 		window.location.href = "#/main/overview";
 		var div1 = document.getElementById('info-frame');
 		div1.style.height = "55%";
+		var tmp = $scope.selectItem.s5*50/$scope.selectItem.ssum+"%";
+		$scope.myObj5 = {
+        	"width" : tmp 
+    	};
+    	tmp = $scope.selectItem.s4*50/$scope.selectItem.ssum+"%";
+		$scope.myObj4 = {
+        	"width" : tmp 
+    	};
+    	tmp = $scope.selectItem.s3*50/$scope.selectItem.ssum+"%";
+		$scope.myObj3 = {
+        	"width" : tmp 
+    	};
+    	tmp = $scope.selectItem.s2*50/$scope.selectItem.ssum+"%";
+		$scope.myObj2 = {
+        	"width" : tmp 
+    	};
+    	tmp = $scope.selectItem.s1*50/$scope.selectItem.ssum+"%";
+		$scope.myObj1 = {
+        	"width" : tmp 
+    	};
 		itemExpanded = 0;
+		if ($ionicSideMenuDelegate.isOpen()) {
+    		$ionicSideMenuDelegate.toggleLeft();
+    	}
+
+    	
 	}
 
   })

@@ -2,8 +2,8 @@
 	<div class="list-frame" id="item-overview">
 		<ion-header-bar class="bar-positive">
 			<button class="button button-clear pull-left" ng-click="itemExpand()">展开</button>
-        	<h1 class="title">景点名称</h1>
-        	<button class="button button-clear pull-right">后退</button>
+        	<h1 class="title">{{selectItem.text}}</h1>
+        	<button class="button button-clear pull-right" ng-click="itemReturn()">后退</button>
     	</ion-header-bar>
     	<ion-scroll class="card-list" direction="y">
         	<div>
@@ -21,11 +21,11 @@
 	            				<div class="red-star"><i class="icon rank-star ion-ios-star"></i></div>
 	            				</div></div>
 	            				<div class="col col-50">
-	            					<div class="percentage">
+	            					<div class="percentage" ng-style="myObj5">
 	            						
 	            						
 	            					</div>
-	            					<div class="percentage-num">数字</div>
+	            					<div class="percentage-num">{{selectItem.s5}}</div>
 	            				</div>
 	            			</div>
 	            			<div class="row">
@@ -40,11 +40,11 @@
 	            				
 	            			</div>
 	            			<div class="col col-50">
-	            					<div class="percentage">
+	            					<div class="percentage" ng-style="myObj4">
 	            						
 	            						
 	            					</div>
-	            					<div class="percentage-num">数字</div>
+	            					<div class="percentage-num">{{selectItem.s4}}</div>
 	            				</div>
 	            			</div>
 	            			<div class="row">
@@ -59,11 +59,11 @@
 	            				
 	            			</div>
 	            			<div class="col col-50">
-	            					<div class="percentage">
+	            					<div class="percentage" ng-style="myObj3">
 	            						
 	            						
 	            					</div>
-	            					<div class="percentage-num">数字</div>
+	            					<div class="percentage-num">{{selectItem.s3}}</div>
 	            				</div>
 	            			</div>
 	            			<div class="row">
@@ -78,11 +78,11 @@
 	            				
 	            			</div>
 	            			<div class="col col-50">
-	            					<div class="percentage">
+	            					<div class="percentage" ng-style="myObj2">
 	            						
 	            						
 	            					</div>
-	            					<div class="percentage-num">数字</div>
+	            					<div class="percentage-num">{{selectItem.s2}}</div>
 	            				</div>
 	            			</div>
 	            			<div class="row">
@@ -97,11 +97,11 @@
 	            				
 	            			</div>
 	            			<div class="col col-50">
-	            					<div class="percentage">
+	            					<div class="percentage" ng-style="myObj1">
 	            						
 	            						
 	            					</div>
-	            					<div class="percentage-num">数字</div>
+	            					<div class="percentage-num">{{selectItem.s1}}</div>
 	            				</div>
 	            			</div>
 	            			
@@ -110,7 +110,7 @@
             		</div>
             		<div class="col col-33">
             			<div>
-            				<h1>得分: 5.0</h1>
+            				<h1>得分: {{selectItem.score}}</h1>
             				<button class="button button-small button-outline button-positive">
             					<i class="icon ion-ios-star"></i>收藏
 							</button>
