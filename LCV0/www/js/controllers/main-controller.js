@@ -42,6 +42,7 @@ angular.module('app.main-controller', [])
 								var mk = new BMap.Marker(r.point);    
 								map.addOverlay(mk);    
 								map.centerAndZoom(r.point, 14);
+								map.enableScrollWheelZoom(true);
 								  
 							}
     						else {
@@ -92,17 +93,40 @@ angular.module('app.main-controller', [])
 		div1.style.height= "0";
     }
     	
-    $scope.itemList = [
+    $scope.itemList = [[
     	{ text: "复旦大学", x: "121.51", y: "31.302"},
     	{ text: "同济大学", x: "121.513", y: "31.288"},
-    	{ text: "我是景点3", x: "121.513", y: "31.288"},
+    	{ text: "交通大学", x: "121.44", y: "31.208"},
     	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288"}
+    ],
+    [
+    	{ text: "复旦大学", x: "121.51", y: "31.302"}
+    ],
+    	
+    [
+    	
+    	{ text: "同济大学", x: "121.513", y: "31.288"}
+    	
+    ],
+    [
+    	
+    	{ text: "我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", x: "121.513", y: "31.288"}
+    ]
+
     ];
     
+    $scope.typeList = [
+    	{name: "大学", index: "0"},
+    	{name: "热门景点", index: "1"},
+    	{name: "饭店", index: "2"},
+    	{name: "我是名字超他妈长的景点类别4啊哈哈哈哈你说我屌不屌啊", index: "3"}
+    ];
+
 	$scope.showItem = function(item){
 		var map = new BMap.Map('baidu-map-api');
 		var point = new BMap.Point(item.x, item.y);
 		map.centerAndZoom(point, 15);
+		map.enableScrollWheelZoom(true);
 		var marker = new BMap.Marker(point);
 		map.addOverlay(marker);
 	}
