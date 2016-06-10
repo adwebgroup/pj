@@ -82,6 +82,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.comment', {
+      url:"/comment",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/item-comment.html'
+        }
+      }
+    })
     .state('main.history', {
       url:"/history",
       views:{

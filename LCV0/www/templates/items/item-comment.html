@@ -4,5 +4,25 @@
         	<h1 class="title">{{selectItem.text}}</h1>
         	<button class="button button-clear pull-right">后退</button>
     	</ion-header-bar>
+    	<div class="comment-frame">
+    		<div class="give-score">
+    			评价: 
+    			<button id="score1" class="button button-small button-stable" ng-mouseenter="hoverScore(1)" ng-mouseleave="leaveScore()" ng-click="setScore(1)">
+    				<i class="icon ion-ios-star"></i>
+				</button>
+				<button id="score2" class="button button-small button-stable" ng-mouseenter="hoverScore(2)" ng-mouseleave="leaveScore()" ng-click="setScore(2)">
+    				<i class="icon ion-ios-star"></i>
+				</button>
+				<button id="score3" class="button button-small button-stable" ng-mouseenter="hoverScore(3)" ng-mouseleave="leaveScore()" ng-click="setScore(3)">
+    				<i class="icon ion-ios-star"></i>
+				</button>
+				<button id="score4" class="button button-small button-stable" ng-mouseenter="hoverScore(4)" ng-mouseleave="leaveScore()" ng-click="setScore(4)">
+    				<i class="icon ion-ios-star"></i>
+				</button>
+				<button id="score5" class="button button-small button-stable" ng-mouseenter="hoverScore(5)" ng-mouseleave="leaveScore()" ng-click="setScore(5)">
+    				<i class="icon ion-ios-star"></i>
+				</button>
+    		</div>
+    	</div>
 	</div>
 </div>

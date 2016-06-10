@@ -1,0 +1,17 @@
+#item-comment{
+	background-color: #fff;
+	bottom:49px;
+	top:0px;
+}
+
+.comment-frame{
+	top: 44px;
+	bottom: 0px;
+	position: absolute;  
+	width: 100%;
+}
+
+.give-score{
+	margin: 10px auto;
+	text-align: center;
+}

@@ -107,7 +107,11 @@ angular.module('app.main-controller', [])
     	window.location.href = "#/main/list";
     	div1.style.height = "100%";
     }
-
+    $scope.openComment = function(){
+    	var div1 = document.getElementById('info-frame');
+    	window.location.href = "#/main/comment";
+    	div1.style.height = "80%";
+    }
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
     	
@@ -182,6 +186,37 @@ angular.module('app.main-controller', [])
 
     	
 	}
+	$scope.cmtScore = 0;
+	$scope.hoverScore = function(score){
+		for(i = 1; i <= 5; i++ ){
+			if(i <= score){
+				var div1 = document.getElementById('score'+i);
+				div1.style.backgroundColor = "#ef473a";
+				div1.style.color = "#fff";
+			}else{
+				var div1 = document.getElementById('score'+i);
+				div1.style.backgroundColor = "#f8f8f8";
+				div1.style.color = "#444";
+			}
+		}
+	}
+	$scope.leaveScore = function(){
+		for(i = 1; i <= 5; i++ ){
+			if(i <= $scope.cmtScore){
+				var div1 = document.getElementById('score'+i);
+				div1.style.backgroundColor = "#ef473a";
+				div1.style.color = "#fff";
+			}else{
+				var div1 = document.getElementById('score'+i);
+				div1.style.backgroundColor = "#f8f8f8";
+				div1.style.color = "#444";
+			}
+		}
+	}
+	$scope.setScore = function(score){
+		$scope.cmtScore = score;
+	}
+
 
   })
 ;
