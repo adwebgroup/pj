@@ -33,6 +33,24 @@ angular.module('app.main-controller', [])
     					window.location.href = "#/main/list";
     					div1.style.height = "100%";
     					break;
+    				case 1:
+    					var map = new BMap.Map('baidu-map-api');
+
+    					var geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
+						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
+							if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+								var mk = new BMap.Marker(r.point);    
+								map.addOverlay(mk);    
+								map.centerAndZoom(r.point, 14);
+								  
+							}
+    						else {
+								alert('failed'+this.getStatus());
+    						}        
+						});
+    					window.location.href = "#/main/nearby";
+    					div1.style.height = "40%";
+    					break;
     				case 2:
     					window.location.href = "#/main/history";
     					div1.style.height = "100%";
@@ -91,5 +109,7 @@ angular.module('app.main-controller', [])
 
   })
 ;
+
+
 
 

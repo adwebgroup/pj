@@ -81,6 +81,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.nearby', {
+      url:"/nearby",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/nearby-list.html'
+        }
+      }
+    })
   ;
 
   // if none of the above states are matched, use this as the fallback
