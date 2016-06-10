@@ -33,6 +33,15 @@
 .percentage{
 	width: 66%;
 	background-color: #ef473a;
-	height: 100%;
-	color: white;
+	height: 50%;
+	
+	
+	vertical-align: top;
+	float: left;
+}
+
+.percentage-num{
+	float: left;
+	font-size: 13px;
+	line-height: 13px;
 }
