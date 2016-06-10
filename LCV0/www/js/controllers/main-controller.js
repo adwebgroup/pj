@@ -4,6 +4,7 @@
 
 
 var clickedTab = -1;
+var itemExpanded = 0;
 
 angular.module('app.main-controller', [])
 
@@ -86,6 +87,19 @@ angular.module('app.main-controller', [])
 		div1.style.height= "200px";
     }
 
+    $scope.itemExpand = function(){
+    	var div1 = document.getElementById('info-frame');
+    	if(itemExpanded == 0){
+    		div1.style.height= "100%";
+    		itemExpanded = 1;
+    	}
+    	else{
+    		div1.style.height= "55%";
+    		itemExpanded = 0;
+    	}
+		
+    }
+
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
     	
@@ -133,7 +147,7 @@ angular.module('app.main-controller', [])
 		window.location.href = "#/main/overview";
 		var div1 = document.getElementById('info-frame');
 		div1.style.height = "55%";
-
+		itemExpanded = 0;
 	}
 
   })
