@@ -90,6 +90,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.detail', {
+      url:"/detail",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/item-detail.html'
+        }
+      }
+    })
     .state('main.history', {
       url:"/history",
       views:{

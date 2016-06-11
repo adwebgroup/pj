@@ -54,6 +54,10 @@ ion-nav-view, body, .pane{
     overflow-x: hidden;
     overflow-y: hidden;
 }
+.scroll-view.scroll-x {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 
 .filter-frame{
 	top: 88px;

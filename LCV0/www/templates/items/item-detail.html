@@ -1,0 +1,29 @@
+<div>
+	<div class="list-frame" id="item-detail">
+		<ion-header-bar class="bar-positive">
+        	<h1 class="title">{{selectItem.text}}详细资料</h1>
+        	<button class="button button-clear pull-right" ng-click="commentReturn()">后退</button>
+    	</ion-header-bar>
+    	<div class="detail-frame">
+    		<div class="detail-title">基本信息</div>
+    		<ion-scroll class="detail-component" direction="y">
+    			{{selectItem.brief}}
+    		</ion-scroll>
+    		<div class="detail-title">图片</div>
+    		<ion-scroll class="detail-component" direction="x">
+    			<div></div>
+    		</ion-scroll>
+    		<div class="detail-title">详细介绍</div>
+    		<ion-scroll class="detail-component" direction="y">
+    			<div>{{selectItem.detail}}</div>
+    		</ion-scroll>
+    	</div>
+	</div>
+	<div class="button-bar bar-positive slide-bar">
+    	<a class="button"><i class="icon ion-ios-star"></i></a>
+    	<a class="button"><i class="icon ion-share"></i></a>
+    	<a class="button"><i class="icon ion-ios-paw"></i></a>
+    	<a class="button"><i class="icon ion-heart"></i></a>
+    	<a class="button">报错</a>
+	</div>
+</div>

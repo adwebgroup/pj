@@ -127,7 +127,12 @@
             		</div>
             	</div>
             	<div class="row">
-            		<div class="col">基本信息</div>
+            		<div class="col">基本信息
+            		<ion-scroll class="overview-component" direction="y">
+    					{{selectItem.brief}}
+    				</ion-scroll>
+    				</div>
+            		
             	</div>
             	<div class="row">
             		<div class="col">他人评价</div>
@@ -138,7 +143,7 @@
 
 	</div>
 	<div class="button-bar bar-positive slide-bar">
-    	<a class="button">详细资料</a>
+    	<a class="button" ng-click="openDetail()">详细资料</a>
     	<a class="button">评价</a>
     	<a class="button">到这去</a>
     	<a class="button" ng-click="openComment()"><i class="icon ion-plus-circled"></i></a>
