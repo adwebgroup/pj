@@ -75,6 +75,7 @@ angular.module('app', ['ionic', 'app.main-controller'])
     })
 
     .state('main.overview', {
+      cache: false,
       url:"/overview",
       views:{
         'itemlist':{

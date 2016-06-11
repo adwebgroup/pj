@@ -23,7 +23,7 @@
           </ion-header-bar>
           <ion-scroll class="card-list" direction="y">
             <div>
-            <ion-checkbox ng-repeat="type in typeList">
+            <ion-checkbox ng-repeat="type in typeList" ng-model="type.checked" ng-checked="type.checked" ng-click="showMarkers(type)">
               {{type.name}}
             </ion-checkbox>
             

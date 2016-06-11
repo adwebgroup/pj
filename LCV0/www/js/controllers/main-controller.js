@@ -5,12 +5,13 @@
 
 var clickedTab = -1;
 var itemExpanded = 0;
-
-
+var markerList = new Array();
+var markerListExist = new Array();
 angular.module('app.main-controller', [])
 
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
     //$ionicSideMenuDelegate.canDragContent(false);
+    $scope.map = null;
     $scope.expandOrNot = "展开";
     $scope.leftSide = function() {
     	
@@ -38,15 +39,15 @@ angular.module('app.main-controller', [])
     					div1.style.height = "100%";
     					break;
     				case 1:
-    					var map = new BMap.Map('baidu-map-api');
+    					//var map = new BMap.Map('baidu-map-api');
 
     					var geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
 							if(this.getStatus() == BMAP_STATUS_SUCCESS){  
 								var mk = new BMap.Marker(r.point);    
-								map.addOverlay(mk);    
-								map.centerAndZoom(r.point, 14);
-								map.enableScrollWheelZoom(true);
+								$scope.map.addOverlay(mk);    
+								$scope.map.centerAndZoom(r.point, 14);
+								$scope.map.enableScrollWheelZoom(true);
 								  
 							}
     						else {
@@ -157,19 +158,20 @@ angular.module('app.main-controller', [])
     ];
     
     $scope.typeList = [
-    	{name: "大学", index: "0"},
-    	{name: "热门景点", index: "1"},
-    	{name: "饭店", index: "2"},
-    	{name: "我是名字超他妈长的景点类别4啊哈哈哈哈你说我屌不屌啊", index: "3"}
+    	{name: "大学", index: "0", checked: "false"},
+    	{name: "热门景点", index: "1", checked: "false"},
+    	{name: "饭店", index: "2", checked: "false"},
+    	{name: "我是名字超他妈长的景点类别4啊哈哈哈哈你说我屌不屌啊", index: "3", checked: "false"}
     ];
 
 	$scope.showItem = function(item){
-		var map = new BMap.Map('baidu-map-api');
+		//var map = new BMap.Map('baidu-map-api');
+		$scope.map = new BMap.Map('baidu-map-api');
 		var point = new BMap.Point(item.x, item.y);
-		map.centerAndZoom(point, 15);
-		map.enableScrollWheelZoom(true);
+		$scope.map.centerAndZoom(point, 15);
+		$scope.map.enableScrollWheelZoom(true);
 		var marker = new BMap.Marker(point);
-		map.addOverlay(marker);
+		$scope.map.addOverlay(marker);
 		$scope.selectItem = item;
 		window.location.href = "#/main/overview";
 		var div1 = document.getElementById('info-frame');
@@ -199,8 +201,42 @@ angular.module('app.main-controller', [])
 		if ($ionicSideMenuDelegate.isOpen()) {
     		$ionicSideMenuDelegate.toggleLeft();
     	}
-
+    	$ionicTabsDelegate.select(0);
     	
+	}
+
+	$scope.showMarkers = function(type){
+		var i = 0;
+		
+		if($scope.map==null){
+			$scope.map = new BMap.Map('baidu-map-api');
+			point = new BMap.Point(121.5, 31.3);
+			$scope.map.centerAndZoom(point, 12);
+			$scope.map.enableScrollWheelZoom(true);
+		}
+		if(markerListExist[type.index]!=1){
+			markerList[type.index] = new Array();
+			
+		}
+		
+		while($scope.itemList[type.index][i]!=null){
+			if(markerListExist[type.index]!=1){
+				var item = $scope.itemList[type.index][i];
+				point = new BMap.Point(item.x, item.y);
+				markerList[type.index][i] = new BMap.Marker(point);
+				$scope.map.addOverlay(markerList[type.index][i]);
+			}
+			
+			if(type.checked){
+				markerList[type.index][i].show();
+			}
+			else{
+				markerList[type.index][i].hide();
+			}
+			i++;
+		}
+		
+		markerListExist[type.index]=1;
 	}
 	
 	$scope.hoverScore = function(score){
