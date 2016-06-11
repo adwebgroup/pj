@@ -2,7 +2,7 @@
 	<div class="list-frame" id="item-comment">
 		<ion-header-bar class="bar-positive">
         	<h1 class="title">{{selectItem.text}}</h1>
-        	<button class="button button-clear pull-right">后退</button>
+        	<button class="button button-clear pull-right" ng-click="commentReturn()">后退</button>
     	</ion-header-bar>
     	<div class="comment-frame">
     		<div class="give-score">
@@ -23,6 +23,15 @@
     				<i class="icon ion-ios-star"></i>
 				</button>
     		</div>
+    		<label class="item item-input">
+				<textarea placeholder="请留下您的评论"></textarea>
+			</label>
+			<div class="select-file">
+				<i class="icon select-file-icon ion-plus-circled"></i>
+			</div>
+			<div class="submit-button ">
+				<button class="button button-positive">提交</button>
+			</div>
     	</div>
 	</div>
 </div>

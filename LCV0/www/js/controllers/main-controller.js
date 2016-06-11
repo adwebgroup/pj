@@ -107,10 +107,16 @@ angular.module('app.main-controller', [])
     	window.location.href = "#/main/list";
     	div1.style.height = "100%";
     }
+    $scope.commentReturn = function(){
+    	var div1 = document.getElementById('info-frame');
+    	window.location.href = "#/main/overview";
+    	div1.style.height = "55%";
+    }
     $scope.openComment = function(){
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/comment";
     	div1.style.height = "80%";
+    	$scope.cmtScore = 0;
     }
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
@@ -186,7 +192,7 @@ angular.module('app.main-controller', [])
 
     	
 	}
-	$scope.cmtScore = 0;
+	
 	$scope.hoverScore = function(score){
 		for(i = 1; i <= 5; i++ ){
 			if(i <= score){
