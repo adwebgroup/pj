@@ -7,6 +7,7 @@ var clickedTab = -1;
 var itemExpanded = 0;
 var markerList = new Array();
 var markerListExist = new Array();
+var marker = null;
 angular.module('app.main-controller', [])
 
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
@@ -44,8 +45,9 @@ angular.module('app.main-controller', [])
     					var geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
 							if(this.getStatus() == BMAP_STATUS_SUCCESS){  
-								var mk = new BMap.Marker(r.point);    
-								$scope.map.addOverlay(mk);    
+								if(marker!=null){marker.hide();}
+								marker = new BMap.Marker(r.point);    
+								$scope.map.addOverlay(marker);    
 								$scope.map.centerAndZoom(r.point, 14);
 								$scope.map.enableScrollWheelZoom(true);
 								  
@@ -166,11 +168,15 @@ angular.module('app.main-controller', [])
 
 	$scope.showItem = function(item){
 		//var map = new BMap.Map('baidu-map-api');
-		$scope.map = new BMap.Map('baidu-map-api');
+		if($scope.map==null){
+			$scope.map = new BMap.Map('baidu-map-api');
+			$scope.map.enableScrollWheelZoom(true);
+		}
 		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
-		$scope.map.enableScrollWheelZoom(true);
-		var marker = new BMap.Marker(point);
+		
+		if(marker!=null){marker.hide();}
+		marker = new BMap.Marker(point);
 		$scope.map.addOverlay(marker);
 		$scope.selectItem = item;
 		window.location.href = "#/main/overview";
@@ -225,9 +231,12 @@ angular.module('app.main-controller', [])
 				point = new BMap.Point(item.x, item.y);
 				markerList[type.index][i] = new BMap.Marker(point);
 				$scope.map.addOverlay(markerList[type.index][i]);
+				$scope.addClickHandler(type.index,i,markerList[type.index][i]);
+				
 			}
 			
 			if(type.checked){
+				
 				markerList[type.index][i].show();
 			}
 			else{
@@ -238,7 +247,14 @@ angular.module('app.main-controller', [])
 		
 		markerListExist[type.index]=1;
 	}
-	
+	$scope.addClickHandler = function(index, i, tmpMarker){
+		console.log(index+" "+i);
+		tmpMarker.addEventListener("click",function(){
+			console.log(index+" "+i);
+			$scope.showItem($scope.itemList[index][i]);
+		});
+	}
+
 	$scope.hoverScore = function(score){
 		for(i = 1; i <= 5; i++ ){
 			if(i <= score){
