@@ -55,4 +55,6 @@
   
 }
 
-
+#score-button, #collection-button, #track-button, #wishlist-button{
+  display: none;
+}
