@@ -142,10 +142,6 @@ angular.module('app.main-controller', [])
     $scope.getItemList = function(orderState){
     	$scope.orderedItemList = new Array();
     	var i = 0;
-    	var div1 = document.getElementById('score-button');
-    	var div2 = document.getElementById('collection-button');
-    	var div3 = document.getElementById('track-button');
-    	var div4 = document.getElementById('wishlist-button');
     	
     	while($scope.itemList[i]!=null){
     		
@@ -153,37 +149,25 @@ angular.module('app.main-controller', [])
     		
     		switch(orderState){
     			case 1:
-    				div1.style.display = "inline";
-					div2.style.display = "none";
-					div3.style.display = "none";
-					div4.style.display = "none";
+    				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.score-a.score;
     				});
     				break;
     			case 2:
-    				div1.style.display = "none";
-					div2.style.display = "inline";
-					div3.style.display = "none";
-					div4.style.display = "none";
+    				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.collection-a.collection;
     				});
     				break;
     			case 3:
-    				div1.style.display = "none";
-    				div2.style.display = "none";
-    				div3.style.display = "inline";
-    				div4.style.display = "none";
+    				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.track-a.track;
     				});
     				break;
     			case 4:
-    				div1.style.display = "none";
-    				div2.style.display = "none";
-    				div3.style.display = "none";
-    				div4.style.display = "inline";
+    				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.wishlist-a.wishlist;
     				});
