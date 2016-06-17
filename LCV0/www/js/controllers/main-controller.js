@@ -110,9 +110,12 @@ angular.module('app.main-controller', [])
 		
     }
     $scope.itemReturn = function(){
+    	$scope.getItemList(0);
+    	clickedTab = 0;
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/list";
     	div1.style.height = "100%";
+    	$ionicTabsDelegate.select(0);
     }
     $scope.commentReturn = function(){
     	var div1 = document.getElementById('info-frame');
