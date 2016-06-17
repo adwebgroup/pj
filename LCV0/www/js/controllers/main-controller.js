@@ -14,6 +14,7 @@ angular.module('app.main-controller', [])
   .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
     //$ionicSideMenuDelegate.canDragContent(false);
     $scope.map = null;
+    $scope.infoWindow = null;
     $scope.expandOrNot = "展开";
     $scope.leftSide = function() {
     	
@@ -299,7 +300,16 @@ angular.module('app.main-controller', [])
 		console.log(index+" "+i);
 		tmpMarker.addEventListener("click",function(){
 			console.log(index+" "+i);
-			$scope.showItem($scope.itemList[index][i]);
+			var opt = {
+				width:200,
+				height:100,
+				title : "title" ,
+				enableCloseOnClick: false
+			}
+			$scope.infoWindow = new BMap.InfoWindow("something", opt);
+			$scope.map.openInfoWindow($scope.infoWindow, tmpMarker.getPosition());
+			$scope.infoWindow.enableCloseOnClick();
+			//$scope.showItem($scope.itemList[index][i]);
 		});
 	}
 
