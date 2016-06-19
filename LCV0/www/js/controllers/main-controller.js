@@ -14,10 +14,7 @@ angular.module('app.main-controller', [])
   	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover) {
     //$ionicSideMenuDelegate.canDragContent(false);
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
-    $scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">test</h1> </ion-header-bar> <ion-content>test</ion-content></ion-popover-view>';
-  	$scope.popover = $ionicPopover.fromTemplate($scope.template, {
-    	scope: $scope
-  	});
+    
 
 
   	$scope.openPopover = function() {
@@ -355,14 +352,19 @@ angular.module('app.main-controller', [])
 		
 		tmpMarker.addEventListener("click",function(){
 			console.log(index+" "+i);
-			$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">'+$scope.itemList[index][i].text+'</h1> </ion-header-bar> <ion-content>'+$scope.itemList[index][i].brief+'</ion-content></ion-popover-view>';
+			$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">'+
+				$scope.itemList[index][i].text+'</h1> </ion-header-bar> <ion-content><p>'+
+				$scope.itemList[index][i].brief+'</p><div style="text-align:center;"><button class="button" ng-click="showMore('+index+','+i+')">查看详情</button></div></ion-content></ion-popover-view>';
 
 			$scope.openPopover();
 			
 			
 		});
 	}
-	
+	$scope.showMore = function(index, i){
+		$scope.closePopover();
+		$scope.showItem($scope.itemList[index][i]);
+	}
 	$scope.hoverScore = function(score){
 		for(i = 1; i <= 5; i++ ){
 			if(i <= score){
