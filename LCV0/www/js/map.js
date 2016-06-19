@@ -1,5 +1,5 @@
 function initialize() {
-	var map = new BMap.Map('baidu-map-api');
+	var map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 	var point = new BMap.Point(121.5, 31.3);
 	map.centerAndZoom(point, 12);
 	map.enableScrollWheelZoom(true);

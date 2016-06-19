@@ -243,7 +243,7 @@ angular.module('app.main-controller', [])
 	$scope.showItem = function(item){
 		//var map = new BMap.Map('baidu-map-api');
 		if($scope.map==null){
-			$scope.map = new BMap.Map('baidu-map-api');
+			$scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 			$scope.map.enableScrollWheelZoom(true);
 			$scope.initMap($scope.map); 
 		}
@@ -290,7 +290,7 @@ angular.module('app.main-controller', [])
 		var i = 0;
 		
 		if($scope.map==null){
-			$scope.map = new BMap.Map('baidu-map-api');
+			$scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 			point = new BMap.Point(121.5, 31.3);
 			$scope.map.centerAndZoom(point, 12);
 			$scope.map.enableScrollWheelZoom(true);
