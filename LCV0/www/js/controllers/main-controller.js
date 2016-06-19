@@ -11,8 +11,36 @@ var marker = null;
 //var orderState = 0;
 angular.module('app.main-controller', [])
 
-  .controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate) {
+  	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover) {
     //$ionicSideMenuDelegate.canDragContent(false);
+    //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
+    $scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">test</h1> </ion-header-bar> <ion-content>test</ion-content></ion-popover-view>';
+  	$scope.popover = $ionicPopover.fromTemplate($scope.template, {
+    	scope: $scope
+  	});
+
+
+  	$scope.openPopover = function() {
+    	$scope.popover = $ionicPopover.fromTemplate($scope.template, {
+    	scope: $scope
+  	});
+    	$scope.popover.show();
+  	};
+  	$scope.closePopover = function() {
+    	$scope.popover.hide();
+  	};
+  	//Cleanup the popover when we're done with it!
+  	$scope.$on('$destroy', function() {
+    	$scope.popover.remove();
+  	});
+  	// Execute action on hide popover
+  	$scope.$on('popover.hidden', function() {
+    	// Execute action
+  	});
+  	// Execute action on remove popover
+  	$scope.$on('popover.removed', function() {
+    	// Execute action
+  	});
     $scope.map = null;
     $scope.infoWindow = null;
     $scope.expandOrNot = "展开";
@@ -53,7 +81,7 @@ angular.module('app.main-controller', [])
 								$scope.map.addOverlay(marker);    
 								$scope.map.centerAndZoom(r.point, 14);
 								$scope.map.enableScrollWheelZoom(true);
-								  
+								$scope.initMap($scope.map);  
 							}
     						else {
 								alert('failed'+this.getStatus());
@@ -220,6 +248,7 @@ angular.module('app.main-controller', [])
 		if($scope.map==null){
 			$scope.map = new BMap.Map('baidu-map-api');
 			$scope.map.enableScrollWheelZoom(true);
+			$scope.initMap($scope.map); 
 		}
 		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
@@ -268,6 +297,7 @@ angular.module('app.main-controller', [])
 			point = new BMap.Point(121.5, 31.3);
 			$scope.map.centerAndZoom(point, 12);
 			$scope.map.enableScrollWheelZoom(true);
+			$scope.initMap($scope.map);
 		}
 		if(markerListExist[type.index]!=1){
 			markerList[type.index] = new Array();
@@ -296,23 +326,43 @@ angular.module('app.main-controller', [])
 		
 		markerListExist[type.index]=1;
 	}
-	$scope.addClickHandler = function(index, i, tmpMarker){
-		console.log(index+" "+i);
-		tmpMarker.addEventListener("click",function(){
-			console.log(index+" "+i);
-			var opt = {
-				width:200,
-				height:100,
-				title : "title" ,
-				enableCloseOnClick: false
-			}
-			$scope.infoWindow = new BMap.InfoWindow("something", opt);
-			$scope.map.openInfoWindow($scope.infoWindow, tmpMarker.getPosition());
-			$scope.infoWindow.enableCloseOnClick();
-			//$scope.showItem($scope.itemList[index][i]);
+	$scope.initMap = function(map){
+		map.addEventListener("click", function(e){          
+	   		if(!e.overlay){
+	   			
+	   			console.log("click");
+	   			map.closeInfoWindow();
+	   		}else{
+	   			console.log("click1");
+	   		}
+		});
+		map.addEventListener("mouseout", function(){          
+	   		
+	   			
+	   			console.log("mouseout");
+	   			map.closeInfoWindow();
+		});
+		map.addEventListener("touchstart", function(){          
+	   		
+	   			
+	   			console.log("touchstart");
+	   			map.closeInfoWindow();
 		});
 	}
 
+	$scope.addClickHandler = function(index, i, tmpMarker){
+		console.log(index+" "+i);
+		
+		tmpMarker.addEventListener("click",function(){
+			console.log(index+" "+i);
+			$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">'+$scope.itemList[index][i].text+'</h1> </ion-header-bar> <ion-content>'+$scope.itemList[index][i].brief+'</ion-content></ion-popover-view>';
+
+			$scope.openPopover();
+			
+			
+		});
+	}
+	
 	$scope.hoverScore = function(score){
 		for(i = 1; i <= 5; i++ ){
 			if(i <= score){
