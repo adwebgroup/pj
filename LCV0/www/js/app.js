@@ -115,6 +115,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.account-login', {
+      url:"/account-login",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/account-login.html'
+        }
+      }
+    })
   ;
 
   // if none of the above states are matched, use this as the fallback

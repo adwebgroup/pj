@@ -1,0 +1,16 @@
+.login-frame-center{
+
+  width: 50%;
+  min-width: 300px;
+  height: 100%;
+  margin: auto;
+
+}
+
+.login-frame{
+	position: absolute;
+	top: 44px;
+	height: 100%;
+	width: inherit;
+}
+

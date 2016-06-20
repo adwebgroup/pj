@@ -91,6 +91,10 @@ angular.module('app.main-controller', [])
     					window.location.href = "#/main/history";
     					div1.style.height = "100%";
     					break;
+    				case 4:
+    					window.location.href = "#/main/account-login";
+    					div1.style.height = "100%";
+    					break;
     				default:
     					div1.style.height = "50%";
     					break;
@@ -177,25 +181,25 @@ angular.module('app.main-controller', [])
     		$scope.orderedItemList[i] = $scope.itemList[i];
     		
     		switch(orderState){
-    			case 1:
+    			case 1://评分排序
     				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.score-a.score;
     				});
     				break;
-    			case 2:
+    			case 2://收藏排序
     				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.collection-a.collection;
     				});
     				break;
-    			case 3:
+    			case 3://足迹排序
     				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.track-a.track;
     				});
     				break;
-    			case 4:
+    			case 4://心愿排序
     				
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.wishlist-a.wishlist;
