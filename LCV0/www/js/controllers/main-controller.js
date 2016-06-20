@@ -245,7 +245,7 @@ angular.module('app.main-controller', [])
 		if($scope.map==null){
 			$scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 			$scope.map.enableScrollWheelZoom(true);
-			$scope.initMap($scope.map); 
+			
 		}
 		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
@@ -295,7 +295,7 @@ angular.module('app.main-controller', [])
 			point = new BMap.Point(121.5, 31.3);
 			$scope.map.centerAndZoom(point, 12);
 			$scope.map.enableScrollWheelZoom(true);
-			$scope.initMap($scope.map);
+			
 		}
 		if(markerListExist[type.index]!=1){
 			markerList[type.index] = new Array();
@@ -324,29 +324,7 @@ angular.module('app.main-controller', [])
 		
 		markerListExist[type.index]=1;
 	}
-	$scope.initMap = function(map){
-		map.addEventListener("click", function(e){          
-	   		if(!e.overlay){
-	   			
-	   			console.log("click");
-	   			map.closeInfoWindow();
-	   		}else{
-	   			console.log("click1");
-	   		}
-		});
-		map.addEventListener("mouseout", function(){          
-	   		
-	   			
-	   			console.log("mouseout");
-	   			map.closeInfoWindow();
-		});
-		map.addEventListener("touchstart", function(){          
-	   		
-	   			
-	   			console.log("touchstart");
-	   			map.closeInfoWindow();
-		});
-	}
+	
 
 	$scope.addClickHandler = function(index, i, tmpMarker){
 		console.log(index+" "+i);
