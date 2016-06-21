@@ -16,7 +16,7 @@ angular.module('app.main-controller', [])
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
     
 
-
+    //悬浮框
   	$scope.openPopover = function() {
     	$scope.popover = $ionicPopover.fromTemplate($scope.template, {
     	scope: $scope
@@ -39,8 +39,10 @@ angular.module('app.main-controller', [])
     	// Execute action
   	});
     $scope.map = null;
-    $scope.infoWindow = null;
+    
     $scope.expandOrNot = "展开";
+
+    //侧边栏
     $scope.leftSide = function() {
     	
     	$ionicSideMenuDelegate.toggleLeft(true);
@@ -50,7 +52,7 @@ angular.module('app.main-controller', [])
     	$scope.getItemList(0);
     	window.location.href = "#/main/mainlist";
     };
-
+    //下方标签选择，index表示第几个标签
     $scope.itemClick = function(index) {
     	
     		var div1 = document.getElementById('info-frame');
@@ -103,12 +105,12 @@ angular.module('app.main-controller', [])
     		
 
 
-    	
+    	//第index个tab被选中
     	$ionicTabsDelegate.select(index);
     	
     	
     };
-    
+    //右上角关闭按钮
     $scope.closeItemList = function(){
     	if ($ionicSideMenuDelegate.isOpen()) {
     		$ionicSideMenuDelegate.toggleLeft();
@@ -118,13 +120,13 @@ angular.module('app.main-controller', [])
     		clickedTab = -1;
     	}
     }	
-    	
+    //图层按钮点击展开候选图层列表	
     $scope.filterExpand = function(){
     	var div1 = document.getElementById('filter-frame');
     	
 		div1.style.height= "200px";
     }
-
+    //具体项目展开和收起
     $scope.itemExpand = function(){
     	var div1 = document.getElementById('info-frame');
     	if(itemExpanded == 0){
@@ -139,6 +141,7 @@ angular.module('app.main-controller', [])
     	}
 		
     }
+    //从具体项目返回项目列表
     $scope.itemReturn = function(){
     	$scope.getItemList(0);
     	clickedTab = 0;
@@ -147,6 +150,7 @@ angular.module('app.main-controller', [])
     	div1.style.height = "100%";
     	$ionicTabsDelegate.select(0);
     }
+    //从评论界面返回具体项目
     $scope.commentReturn = function(){
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/overview";
@@ -154,24 +158,27 @@ angular.module('app.main-controller', [])
     	itemExpanded = 0;
     	$scope.expandOrNot = "展开";
     }
+    //打开评论界面
     $scope.openComment = function(){
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/comment";
     	div1.style.height = "80%";
     	$scope.cmtScore = 0;
     }
+    //打开项目详情
     $scope.openDetail = function(){
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/detail";
     	div1.style.height = "100%";
     }
+    //点击关闭收起图层候选列表
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
     	
     	
 		div1.style.height= "0";
     }
-    
+    //获取项目列表，orderState表示排序方式，0为默认
     $scope.getItemList = function(orderState){
     	$scope.orderedItemList = new Array();
     	var i = 0;
@@ -244,6 +251,7 @@ angular.module('app.main-controller', [])
     	{name: "我是名字超他妈长的景点类别4啊哈哈哈哈你说我屌不屌啊", index: "3", checked: "false"}
     ];
 
+    //显示项目并在地图上显示标记，item为一个项目的对象
 	$scope.showItem = function(item){
 		//var map = new BMap.Map('baidu-map-api');
 		if($scope.map==null){
@@ -290,7 +298,7 @@ angular.module('app.main-controller', [])
     	$ionicTabsDelegate.select(0);
     	
 	}
-
+	//在地图上显示一个类别所有项目的标记，type为类型
 	$scope.showMarkers = function(type){
 		var i = 0;
 		
@@ -329,7 +337,7 @@ angular.module('app.main-controller', [])
 		markerListExist[type.index]=1;
 	}
 	
-
+	//为地图上每个标记添加监听器，点击显示浮动框
 	$scope.addClickHandler = function(index, i, tmpMarker){
 		console.log(index+" "+i);
 		
@@ -344,10 +352,12 @@ angular.module('app.main-controller', [])
 			
 		});
 	}
+	//浮动框中点"显示详情"进入项目
 	$scope.showMore = function(index, i){
 		$scope.closePopover();
 		$scope.showItem($scope.itemList[index][i]);
 	}
+	//下面三个方法用于评分时显示五颗星星，悬浮时点亮相应颗数，离开时显示已选评分颗数
 	$scope.hoverScore = function(score){
 		for(i = 1; i <= 5; i++ ){
 			if(i <= score){
@@ -377,6 +387,7 @@ angular.module('app.main-controller', [])
 	$scope.setScore = function(score){
 		$scope.cmtScore = score;
 	}
+	//下面两个方法用于登录界面和注册界面之间切换
 	$scope.switchReg = function(){
 		window.location.href = "#/main/account-register";
 	}
