@@ -123,6 +123,14 @@ angular.module('app', ['ionic', 'app.main-controller'])
         }
       }
     })
+    .state('main.account-register', {
+      url:"/account-register",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/account-register.html'
+        }
+      }
+    })
   ;
 
   // if none of the above states are matched, use this as the fallback

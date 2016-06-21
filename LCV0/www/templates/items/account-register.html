@@ -11,11 +11,19 @@
       
       <div class="list login-info">
         <label class="item item-input">
+          <span class="input-label">邮箱：</span>
+          <input type="text"></input>
+        </label>
+        <label class="item item-input">
           <span class="input-label">用户名：</span>
           <input type="text"></input>
         </label>
         <label class="item item-input">
           <span class="input-label">密码：</span>
+          <input type="password"></input>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">确认密码：</span>
           <input type="password"></input>
         </label>
       </div>
@@ -24,13 +32,11 @@
         <button class="button button-block button-positive">登录</button>
       </div>
       <div class="switch-frame">
-        还没有账号？
-        <button class="button button-clear button-positive button-register" ng-click="switchReg()">我要注册</button>
+        已有账号？
+        <button class="button button-clear button-positive button-register" ng-click="switchLog()">返回登录</button>
         
       </div>
-      <div class="switch-frame">
-        第三方账号登录？
-      </div>
+      
       </div>
     </div>
   </div>

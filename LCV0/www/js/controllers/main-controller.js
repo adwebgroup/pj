@@ -377,8 +377,12 @@ angular.module('app.main-controller', [])
 	$scope.setScore = function(score){
 		$scope.cmtScore = score;
 	}
-
-
+	$scope.switchReg = function(){
+		window.location.href = "#/main/account-register";
+	}
+	$scope.switchLog = function(){
+		window.location.href = "#/main/account-login";
+	}
   })
 ;
 
