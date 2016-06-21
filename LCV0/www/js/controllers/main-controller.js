@@ -33,8 +33,8 @@ angular.module('app.main-controller', [])
   	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover) {
     //$ionicSideMenuDelegate.canDragContent(false);
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
-    
 
+	console.log('mainCtrl')
     //悬浮框
   	$scope.openPopover = function() {
     	$scope.popover = $ionicPopover.fromTemplate($scope.template, {
@@ -58,12 +58,12 @@ angular.module('app.main-controller', [])
     	// Execute action
   	});
     $scope.map = null;
-    
+
     $scope.expandOrNot = "展开";
 
     //侧边栏
     $scope.leftSide = function() {
-    	
+
     	$ionicSideMenuDelegate.toggleLeft(true);
     	if ($ionicSideMenuDelegate.isOpen()) {
     		$ionicSideMenuDelegate.toggleLeft();
@@ -73,14 +73,14 @@ angular.module('app.main-controller', [])
     };
     //下方标签选择，index表示第几个标签
     $scope.itemClick = function(index) {
-    	
+
     		var div1 = document.getElementById('info-frame');
     		if(clickedTab == index){
     			div1.style.height = "0";
     			clickedTab = -1;
     		}
     		else{
-    			
+
     			clickedTab = index;
     			switch (index){
     				case 0:
@@ -93,17 +93,17 @@ angular.module('app.main-controller', [])
 
     					var geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
-							if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+							if(this.getStatus() == BMAP_STATUS_SUCCESS){
 								if(marker!=null){marker.hide();}
-								marker = new BMap.Marker(r.point);    
-								$scope.map.addOverlay(marker);    
+								marker = new BMap.Marker(r.point);
+								$scope.map.addOverlay(marker);
 								$scope.map.centerAndZoom(r.point, 14);
 								$scope.map.enableScrollWheelZoom(true);
-								$scope.initMap($scope.map);  
+								$scope.initMap($scope.map);
 							}
     						else {
 								alert('failed'+this.getStatus());
-    						}        
+    						}
 						});
     					window.location.href = "#/main/nearby";
     					div1.style.height = "40%";
@@ -121,13 +121,13 @@ angular.module('app.main-controller', [])
     					break;
     			}
     		}
-    		
+
 
 
     	//第index个tab被选中
     	$ionicTabsDelegate.select(index);
-    	
-    	
+
+
     };
     //右上角关闭按钮
     $scope.closeItemList = function(){
@@ -138,11 +138,11 @@ angular.module('app.main-controller', [])
     		div1.style.height = "0";
     		clickedTab = -1;
     	}
-    }	
-    //图层按钮点击展开候选图层列表	
+    }
+    //图层按钮点击展开候选图层列表
     $scope.filterExpand = function(){
     	var div1 = document.getElementById('filter-frame');
-    	
+
 		div1.style.height= "200px";
     }
     //具体项目展开和收起
@@ -158,7 +158,7 @@ angular.module('app.main-controller', [])
     		itemExpanded = 0;
     		$scope.expandOrNot = "展开";
     	}
-		
+
     }
     //从具体项目返回项目列表
     $scope.itemReturn = function(){
@@ -193,51 +193,51 @@ angular.module('app.main-controller', [])
     //点击关闭收起图层候选列表
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
-    	
-    	
+
+
 		div1.style.height= "0";
     }
     //获取项目列表，orderState表示排序方式，0为默认
     $scope.getItemList = function(orderState){
     	$scope.orderedItemList = new Array();
     	var i = 0;
-    	
+
     	while($scope.itemList[i]!=null){
-    		
+
     		$scope.orderedItemList[i] = $scope.itemList[i];
-    		
+
     		switch(orderState){
     			case 1://评分排序
-    				
+
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.score-a.score;
     				});
     				break;
     			case 2://收藏排序
-    				
+
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.collection-a.collection;
     				});
     				break;
     			case 3://足迹排序
-    				
+
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.track-a.track;
     				});
     				break;
     			case 4://心愿排序
-    				
+
     				$scope.orderedItemList[i] = $scope.orderedItemList[i].sort(function(a,b){
     					return b.wishlist-a.wishlist;
     				});
     				break;
     		}
-    		
+
     		i++;
     	}
-    	
+
     }
-	    
+
     $scope.itemList = gItemList;
 	$scope.typeList = gTypeList;
 
@@ -247,11 +247,11 @@ angular.module('app.main-controller', [])
 		if($scope.map==null){
 			$scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 			$scope.map.enableScrollWheelZoom(true);
-			
+
 		}
 		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
-		
+
 		if(marker!=null){marker.hide();}
 		marker = new BMap.Marker(point);
 		$scope.addClickHandler(item.parent, item.index, marker)
@@ -262,23 +262,23 @@ angular.module('app.main-controller', [])
 		div1.style.height = "55%";
 		var tmp = $scope.selectItem.s5*50/$scope.selectItem.ssum+"%";
 		$scope.myObj5 = {
-        	"width" : tmp 
+        	"width" : tmp
     	};
     	tmp = $scope.selectItem.s4*50/$scope.selectItem.ssum+"%";
 		$scope.myObj4 = {
-        	"width" : tmp 
+        	"width" : tmp
     	};
     	tmp = $scope.selectItem.s3*50/$scope.selectItem.ssum+"%";
 		$scope.myObj3 = {
-        	"width" : tmp 
+        	"width" : tmp
     	};
     	tmp = $scope.selectItem.s2*50/$scope.selectItem.ssum+"%";
 		$scope.myObj2 = {
-        	"width" : tmp 
+        	"width" : tmp
     	};
     	tmp = $scope.selectItem.s1*50/$scope.selectItem.ssum+"%";
 		$scope.myObj1 = {
-        	"width" : tmp 
+        	"width" : tmp
     	};
 		itemExpanded = 0;
 		$scope.expandOrNot = "展开";
@@ -286,24 +286,24 @@ angular.module('app.main-controller', [])
     		$ionicSideMenuDelegate.toggleLeft();
     	}
     	$ionicTabsDelegate.select(0);
-    	
+
 	}
 	//在地图上显示一个类别所有项目的标记，type为类型
 	$scope.showMarkers = function(type){
 		var i = 0;
-		
+
 		if($scope.map==null){
 			$scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
 			point = new BMap.Point(121.5, 31.3);
 			$scope.map.centerAndZoom(point, 12);
 			$scope.map.enableScrollWheelZoom(true);
-			
+
 		}
 		if(markerListExist[type.index]!=1){
 			markerList[type.index] = new Array();
-			
+
 		}
-		
+
 		while($scope.itemList[type.index][i]!=null){
 			if(markerListExist[type.index]!=1){
 				var item = $scope.itemList[type.index][i];
@@ -311,11 +311,11 @@ angular.module('app.main-controller', [])
 				markerList[type.index][i] = new BMap.Marker(point);
 				$scope.map.addOverlay(markerList[type.index][i]);
 				$scope.addClickHandler(type.index,i,markerList[type.index][i]);
-				
+
 			}
-			
+
 			if(type.checked){
-				
+
 				markerList[type.index][i].show();
 			}
 			else{
@@ -323,14 +323,14 @@ angular.module('app.main-controller', [])
 			}
 			i++;
 		}
-		
+
 		markerListExist[type.index]=1;
 	}
-	
+
 	//为地图上每个标记添加监听器，点击显示浮动框
 	$scope.addClickHandler = function(index, i, tmpMarker){
 		console.log(index+" "+i);
-		
+
 		tmpMarker.addEventListener("click",function(){
 			console.log(index+" "+i);
 			$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title">'+
@@ -338,44 +338,14 @@ angular.module('app.main-controller', [])
 				$scope.itemList[index][i].brief+'</p><div style="text-align:center;"><button class="button" ng-click="showMore('+index+','+i+')">查看详情</button></div></ion-content></ion-popover-view>';
 
 			$scope.openPopover();
-			
-			
+
+
 		});
 	}
 	//浮动框中点"显示详情"进入项目
 	$scope.showMore = function(index, i){
 		$scope.closePopover();
 		$scope.showItem($scope.itemList[index][i]);
-	}
-	//下面三个方法用于评分时显示五颗星星，悬浮时点亮相应颗数，离开时显示已选评分颗数
-	$scope.hoverScore = function(score){
-		for(i = 1; i <= 5; i++ ){
-			if(i <= score){
-				var div1 = document.getElementById('score'+i);
-				div1.style.backgroundColor = "#ef473a";
-				div1.style.color = "#fff";
-			}else{
-				var div1 = document.getElementById('score'+i);
-				div1.style.backgroundColor = "#f8f8f8";
-				div1.style.color = "#444";
-			}
-		}
-	}
-	$scope.leaveScore = function(){
-		for(i = 1; i <= 5; i++ ){
-			if(i <= $scope.cmtScore){
-				var div1 = document.getElementById('score'+i);
-				div1.style.backgroundColor = "#ef473a";
-				div1.style.color = "#fff";
-			}else{
-				var div1 = document.getElementById('score'+i);
-				div1.style.backgroundColor = "#f8f8f8";
-				div1.style.color = "#444";
-			}
-		}
-	}
-	$scope.setScore = function(score){
-		$scope.cmtScore = score;
 	}
 	//下面两个方法用于登录界面和注册界面之间切换
 	$scope.switchReg = function(){
@@ -384,8 +354,40 @@ angular.module('app.main-controller', [])
 	$scope.switchLog = function(){
 		window.location.href = "#/main/account-login";
 	}
-  })
-;
+
+
+    //下面三个方法用于评分时显示五颗星星，悬浮时点亮相应颗数，离开时显示已选评分颗数
+    $scope.hoverScore = function(score){
+	    for(i = 1; i <= 5; i++ ){
+		    if(i <= score){
+			    var div1 = document.getElementById('score'+i);
+			    div1.style.backgroundColor = "#ef473a";
+			    div1.style.color = "#fff";
+		    }else{
+			    var div1 = document.getElementById('score'+i);
+			    div1.style.backgroundColor = "#f8f8f8";
+			    div1.style.color = "#444";
+		    }
+	    }
+    }
+    $scope.leaveScore = function(){
+	    for(i = 1; i <= 5; i++ ){
+		    if(i <= $scope.cmtScore){
+			    var div1 = document.getElementById('score'+i);
+			    div1.style.backgroundColor = "#ef473a";
+			    div1.style.color = "#fff";
+		    }else{
+			    var div1 = document.getElementById('score'+i);
+			    div1.style.backgroundColor = "#f8f8f8";
+			    div1.style.color = "#444";
+		    }
+	    }
+    }
+    $scope.setScore = function(score){
+	    $scope.cmtScore = score;
+    }
+  });
+
 
 
 

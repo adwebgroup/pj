@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
 angular.module('app', ['ionic', 'app.main-controller'])
 
 .run(function($ionicPlatform) {
@@ -21,6 +22,7 @@ angular.module('app', ['ionic', 'app.main-controller'])
       StatusBar.styleDefault();
     }
   });
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -53,7 +55,6 @@ angular.module('app', ['ionic', 'app.main-controller'])
       //abstract: true,
       templateUrl: "templates/main.html",
       controller: 'mainCtrl'
-        
     })
 
     .state('main.mainlist', {
@@ -89,7 +90,8 @@ angular.module('app', ['ionic', 'app.main-controller'])
         'itemlist':{
           templateUrl: 'templates/items/item-comment.html'
         }
-      }
+      },
+      // controller: 'testCtrl' // TODO
     })
     .state('main.detail', {
       url:"/detail",
