@@ -9,8 +9,17 @@
 
 .login-frame{
 	position: absolute;
-	top: 44px;
+	top: 100px;
 	height: 100%;
 	width: inherit;
 }
 
+.button-register{
+	position: absolute;
+	right: 0;
+}
+
+.switch-frame{
+	line-height: 47px;
+	width: inherit;
+}
