@@ -90,22 +90,31 @@ angular.module('app.main-controller', [])
     					break;
     				case 1:
     					//var map = new BMap.Map('baidu-map-api');
+                        if($scope.map==null){
+                            $scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
+                            $scope.map.enableScrollWheelZoom(true);
 
+                        }
     					var geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
 							if(this.getStatus() == BMAP_STATUS_SUCCESS){
 								if(marker!=null){marker.hide();}
 								marker = new BMap.Marker(r.point);
+                                var icons = "img/icon-location.png";
+                                var icon = new BMap.Icon(icons, new BMap.Size(512, 512));
+                                marker.setIcon(icon);
+                                $scope.nearbyList = $scope.getNearbyList(r.point.lng, r.point.lat);
 								$scope.map.addOverlay(marker);
 								$scope.map.centerAndZoom(r.point, 14);
-								$scope.map.enableScrollWheelZoom(true);
-								$scope.initMap($scope.map);
+								//$scope.initMap($scope.map);
 							}
     						else {
 								alert('failed'+this.getStatus());
     						}
 						});
     					window.location.href = "#/main/nearby";
+                        $scope.getItemList(0);
+                        
     					div1.style.height = "40%";
     					break;
     				case 2:
@@ -197,6 +206,59 @@ angular.module('app.main-controller', [])
 
 		div1.style.height= "0";
     }
+    //获取附近x(5)公里内项目列表
+    $scope.getNearbyList = function(x, y){
+        $scope.nearbyList = new Array();
+        var k = 0;
+        var pointA = new BMap.Point(x, y);  
+        
+        var pointB = null;  
+        for(var i = 0; i < $scope.itemList.length; i++){
+            for(var j = 0; j < $scope.itemList[i].length; j++){
+                pointB = new BMap.Point($scope.itemList[i][j].x,$scope.itemList[i][j].y);
+                if($scope.map.getDistance(pointA,pointB).toFixed(2)<5000){
+                    $scope.nearbyList[k] = $scope.itemList[i][j];
+                    k++;
+                }
+            }
+        }
+
+        $scope.getOrderedNearbyList(0);
+        
+    }
+
+    //获取附近列表
+    $scope.getOrderedNearbyList = function(orderState){
+        $scope.orderedNearbyList = $scope.nearbyList;
+        switch(orderState){
+                case 1://评分排序
+
+                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                        return b.score-a.score;
+                    });
+                    break;
+                case 2://收藏排序
+
+                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                        return b.collection-a.collection;
+                    });
+                    break;
+                case 3://足迹排序
+
+                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                        return b.track-a.track;
+                    });
+                    break;
+                case 4://心愿排序
+
+                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                        return b.wishlist-a.wishlist;
+                    });
+                    break;
+        }
+        window.location.href = "#";
+    }
+
     //获取项目列表，orderState表示排序方式，0为默认
     $scope.getItemList = function(orderState){
     	$scope.orderedItemList = new Array();
@@ -235,7 +297,7 @@ angular.module('app.main-controller', [])
 
     		i++;
     	}
-
+        
     }
 
     $scope.itemList = gItemList;
