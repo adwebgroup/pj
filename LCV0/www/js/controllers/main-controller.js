@@ -33,7 +33,8 @@ angular.module('app.main-controller', [])
   	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover) {
     //$ionicSideMenuDelegate.canDragContent(false);
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
-
+    $scope.itemList = gItemList;
+    $scope.typeList = gTypeList;
 	console.log('mainCtrl')
     //悬浮框
   	$scope.openPopover = function() {
@@ -90,6 +91,7 @@ angular.module('app.main-controller', [])
     					break;
     				case 1:
     					//var map = new BMap.Map('baidu-map-api');
+                        $scope.filterClose();
                         if($scope.map==null){
                             $scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
                             $scope.map.enableScrollWheelZoom(true);
@@ -205,6 +207,23 @@ angular.module('app.main-controller', [])
 
 
 		div1.style.height= "0";
+        for(var j = 0; j < $scope.typeList.length; j++){
+            type = $scope.typeList[j];
+            var i = 0;
+            console.log(type);
+            while($scope.itemList[type.index][i]!=null){
+                if(type.checked){
+
+                    if(markerListExist[type.index]==1){
+                        markerList[type.index][i].hide();
+                    }
+                    
+                }
+                i++;
+
+            }
+            type.checked = false;
+        }
     }
     //获取附近x(5)公里内项目列表
     $scope.getNearbyList = function(x, y){
@@ -300,8 +319,7 @@ angular.module('app.main-controller', [])
         
     }
 
-    $scope.itemList = gItemList;
-	$scope.typeList = gTypeList;
+    
 
     //显示项目并在地图上显示标记，item为一个项目的对象
 	$scope.showItem = function(item){
