@@ -99,10 +99,10 @@ angular.module('app.main-controller', [])
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
 							if(this.getStatus() == BMAP_STATUS_SUCCESS){
 								if(marker!=null){marker.hide();}
-								marker = new BMap.Marker(r.point);
-                                var icons = "img/icon-location.png";
-                                var icon = new BMap.Icon(icons, new BMap.Size(512, 512));
-                                marker.setIcon(icon);
+								
+                                var icons = "./img/icon-location.png";
+                                var myicon = new BMap.Icon(icons, new BMap.Size(20, 20));
+                                marker = new BMap.Marker(r.point, {icon: myicon});
                                 $scope.nearbyList = $scope.getNearbyList(r.point.lng, r.point.lat);
 								$scope.map.addOverlay(marker);
 								$scope.map.centerAndZoom(r.point, 14);
