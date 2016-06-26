@@ -229,17 +229,18 @@ angular.module('app.main-controller', [])
             type.checked = false;
         }
     }
-    //获取附近x(5)公里内项目列表
+    
+    //获取附近x(10)公里内项目列表
     $scope.getNearbyList = function(x, y){
-        $scope.nearbyList = new Array();
+        
         var k = 0;
         var pointA = new BMap.Point(x, y);  
-        
+        $scope.nearbyList = new Array();
         var pointB = null;  
         for(var i = 0; i < $scope.itemList.length; i++){
             for(var j = 0; j < $scope.itemList[i].length; j++){
                 pointB = new BMap.Point($scope.itemList[i][j].x,$scope.itemList[i][j].y);
-                if($scope.map.getDistance(pointA,pointB).toFixed(2)<5000){
+                if($scope.map.getDistance(pointA,pointB).toFixed(2)<10000){
                     $scope.nearbyList[k] = $scope.itemList[i][j];
                     markerNearbyList[k] = new BMap.Marker(pointB);
                     $scope.map.addOverlay(markerNearbyList[k]);
@@ -256,34 +257,37 @@ angular.module('app.main-controller', [])
 
     //获取附近列表
     $scope.getOrderedNearbyList = function(orderState){
+        if($scope.orderedNearbyList==null)
         $scope.orderedNearbyList = $scope.nearbyList;
+        
         switch(orderState){
                 case 1://评分排序
 
-                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                    $scope.orderedNearbyList = $scope.orderedNearbyList.sort(function(a,b){
                         return b.score-a.score;
                     });
                     break;
                 case 2://收藏排序
 
-                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                    $scope.orderedNearbyList = $scope.orderedNearbyList.sort(function(a,b){
                         return b.collection-a.collection;
                     });
                     break;
                 case 3://足迹排序
 
-                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                    $scope.orderedNearbyList = $scope.orderedNearbyList.sort(function(a,b){
                         return b.track-a.track;
                     });
                     break;
                 case 4://心愿排序
 
-                    $scope.orderedItemList = $scope.orderedItemList.sort(function(a,b){
+                    $scope.orderedNearbyList = $scope.orderedNearbyList.sort(function(a,b){
                         return b.wishlist-a.wishlist;
                     });
                     break;
         }
         window.location.href = "#";
+        $ionicTabsDelegate.select(1);
     }
 
     //获取项目列表，orderState表示排序方式，0为默认
