@@ -33,7 +33,8 @@ var gTypeList = [
 ];
 
 angular.module('app.main-controller', [])
-  	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover,$http) {
+
+  	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover, $ionicPopup, $http) {
     //$ionicSideMenuDelegate.canDragContent(false);
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
     //  $http.get("http://localhost:8080/CSServer/GetSceneryListWithInfo"
@@ -489,6 +490,36 @@ angular.module('app.main-controller', [])
     $scope.setScore = function(score){
 	    $scope.cmtScore = score;
     }
+
+    //搜索景点
+    $scope.searchItem = function(itemStr){
+        var t = false;
+
+        for(var i = 0; i < $scope.itemList.length; i++){
+            for(var j = 0; j < $scope.itemList[i].length; j++){
+                if(itemStr == $scope.itemList[i][j].text){
+                    $scope.showItem($scope.itemList[i][j]);
+
+                    t = true;
+                    break;
+                }
+
+            }
+        }
+        if(!t){
+            $scope.showAlert(itemStr);
+        }
+    }
+
+    // 一个提示对话框
+    $scope.showAlert = function(itemStr) {
+        var alertPopup = $ionicPopup.alert({
+            title: '抱歉',
+            template: '找不到“'+itemStr+'”'
+        });
+
+    }
+
   });
 
 
