@@ -31,7 +31,7 @@ var gTypeList = [
 ];
 
 angular.module('app.main-controller', [])
-  	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover) {
+  	.controller('mainCtrl', function($scope, $ionicSideMenuDelegate, $ionicTabsDelegate, $ionicPopover, $ionicPopup) {
     //$ionicSideMenuDelegate.canDragContent(false);
     //$scope.template = '<ion-popover-view style="opacity:0.8"><ion-header-bar> <h1 class="title"></h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
     $scope.itemList = gItemList;
@@ -495,8 +495,17 @@ angular.module('app.main-controller', [])
             }
         }
         if(!t){
-            alert("没有搜到'"+itemStr+"'这个景点");
+            $scope.showAlert(itemStr);
         }
+    }
+
+    // 一个提示对话框
+    $scope.showAlert = function(itemStr) {
+        var alertPopup = $ionicPopup.alert({
+            title: '抱歉',
+            template: '找不到“'+itemStr+'”'
+        });
+     
     }
 
   });
