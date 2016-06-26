@@ -451,14 +451,6 @@ angular.module('app.main-controller', [])
 		$scope.closePopover();
 		$scope.showItem($scope.itemList[index][i]);
 	}
-	//下面两个方法用于登录界面和注册界面之间切换
-	$scope.switchReg = function(){
-		window.location.href = "#/main/account-register";
-	}
-	$scope.switchLog = function(){
-		window.location.href = "#/main/account-login";
-	}
-
 
     //下面三个方法用于评分时显示五颗星星，悬浮时点亮相应颗数，离开时显示已选评分颗数
     $scope.hoverScore = function(score){

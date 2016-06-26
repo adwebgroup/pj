@@ -8,7 +8,8 @@
 
 angular.module('app', ['ionic',
   'app.main-controller',
-  'app.history-controller'
+  'app.history-controller',
+  'app.profile-controller'
 ])
 
 .run(function($ionicPlatform) {
@@ -125,7 +126,8 @@ angular.module('app', ['ionic',
       url:"/account-login",
       views:{
         'itemlist':{
-          templateUrl: 'templates/items/account-login.html'
+          templateUrl: 'templates/profile/account-login.html',
+          controller:'loginCtrl'
         }
       }
     })
@@ -133,7 +135,8 @@ angular.module('app', ['ionic',
       url:"/account-register",
       views:{
         'itemlist':{
-          templateUrl: 'templates/items/account-register.html'
+          templateUrl: 'templates/profile/account-register.html',
+          controller: 'registerCtrl'
         }
       }
     })
