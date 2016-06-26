@@ -478,6 +478,27 @@ angular.module('app.main-controller', [])
     $scope.setScore = function(score){
 	    $scope.cmtScore = score;
     }
+
+    //搜索景点
+    $scope.searchItem = function(itemStr){
+        var t = false;
+
+        for(var i = 0; i < $scope.itemList.length; i++){
+            for(var j = 0; j < $scope.itemList[i].length; j++){
+                if(itemStr == $scope.itemList[i][j].text){
+                    $scope.showItem($scope.itemList[i][j]);
+                    
+                    t = true;
+                    break;
+                }
+
+            }
+        }
+        if(!t){
+            alert("没有搜到'"+itemStr+"'这个景点");
+        }
+    }
+
   });
 
 
