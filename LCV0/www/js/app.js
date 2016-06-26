@@ -6,7 +6,10 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('app', ['ionic', 'app.main-controller'])
+angular.module('app', ['ionic',
+  'app.main-controller',
+  'app.history-controller'
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -105,7 +108,8 @@ angular.module('app', ['ionic', 'app.main-controller'])
       url:"/history",
       views:{
         'itemlist':{
-          templateUrl: 'templates/items/history-list.html'
+          templateUrl: 'templates/history/history-list.html',
+          controller: 'historyCtrl'
         }
       }
     })
