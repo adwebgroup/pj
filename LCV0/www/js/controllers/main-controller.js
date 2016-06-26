@@ -7,6 +7,7 @@ var clickedTab = -1;
 var itemExpanded = 0;
 var markerList = new Array();
 var markerListExist = new Array();
+var markerNearbyList = new Array();
 var marker = null;
 //var orderState = 0;
 var gItemList = [
@@ -155,6 +156,9 @@ angular.module('app.main-controller', [])
     	var div1 = document.getElementById('filter-frame');
 
 		div1.style.height= "200px";
+        for(var i = 0; i < markerNearbyList.length; i++){
+            markerNearbyList[i].hide();
+        }
     }
     //具体项目展开和收起
     $scope.itemExpand = function(){
@@ -237,6 +241,10 @@ angular.module('app.main-controller', [])
                 pointB = new BMap.Point($scope.itemList[i][j].x,$scope.itemList[i][j].y);
                 if($scope.map.getDistance(pointA,pointB).toFixed(2)<5000){
                     $scope.nearbyList[k] = $scope.itemList[i][j];
+                    markerNearbyList[k] = new BMap.Marker(pointB);
+                    $scope.map.addOverlay(markerNearbyList[k]);
+                    $scope.addClickHandler(i,j,markerNearbyList[k]);
+                    markerNearbyList[k].show();
                     k++;
                 }
             }
