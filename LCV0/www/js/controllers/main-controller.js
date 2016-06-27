@@ -353,7 +353,7 @@ angular.module('app.main-controller', [])
 			$scope.map.enableScrollWheelZoom(true);
 
 		}
-		var point = new BMap.Point(item.positionLatitude, item.positionLongitude);
+		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
 
 		if(marker!=null){marker.hide();}
@@ -511,6 +511,8 @@ angular.module('app.main-controller', [])
         });
 
     }
+      //搜索历史景观
+      $scope.historyList = [{name:"景点1"},{name:"景点2"}];
 
   });
 

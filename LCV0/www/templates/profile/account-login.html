@@ -5,12 +5,12 @@
       <button class="button button-clear pull-right" ng-click="closeItemList()">关闭</button>
     </ion-header-bar>
     <div class="login-frame-center">
-      
+
       <div class="login-frame-2">
         <form name="myForm" novalidate>
-      
+
           <div class="list login-info">
-      
+
             <label class="item item-input">
               <span class="input-label">用户名：</span>
               <input type="text" name="username" ng-model="username" required>
@@ -19,15 +19,15 @@
               <span class="input-label">密码：</span>
               <input type="password" name="password" ng-model="password" required>
             </label>
-      
+
           </div>
-      
+
           <div class="error-show" style="color:red" ng-show="myForm.$dirty">
             <span ng-show="myForm.username.$error.required && myForm.username.$dirty">用户名是必须的。</span>
             <span ng-show="myForm.password.$error.required && !myForm.username.$error.required && myForm.password.$dirty">密码是必须的。</span>
           </div>
 
-      
+
           <div class="padding login-button">
             <button class="button button-block button-positive" ng-disabled="myForm.username.$invalid || myForm.password.$invalid" >登录</button>
           </div>
@@ -35,11 +35,18 @@
         <div class="switch-frame">
           还没有账号？
           <button class="button button-clear button-positive button-register" ng-click="switchReg()">我要注册</button>
-        
+
         </div>
         <div class="switch-frame">
           第三方账号登录？
         </div>
+        <!--<div>-->
+          <!--<img id="userUrl" ng-src="{{user.userPortrait}}" ng-click="show()"/>-->
+          <!--<form  style="display:none" enctype="multipart/form-data" id="iconForm" name="uploadForm">-->
+            <!--<input style="display:none" name="userId" value="{{1}}" />-->
+            <!--<input name="picture" id="picture" type="file" />-->
+          <!--</form>-->
+        <!--</div>-->
       </div>
     </div>
   </div>

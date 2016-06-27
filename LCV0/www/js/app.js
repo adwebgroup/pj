@@ -8,7 +8,6 @@
 
 angular.module('app', ['ionic',
   'app.main-controller',
-  'app.history-controller',
   'app.profile-controller'
 ])
 
@@ -109,8 +108,7 @@ angular.module('app', ['ionic',
       url:"/history",
       views:{
         'itemlist':{
-          templateUrl: 'templates/history/history-list.html',
-          controller: 'historyCtrl'
+          templateUrl: 'templates/history/history-list.html'
         }
       }
     })
