@@ -9,15 +9,16 @@ var markerList = new Array();
 var markerListExist = new Array();
 var markerNearbyList = new Array();
 var marker = null;
+var polygon = null;
 //var orderState = 0;
 var gItemList =
     [
-        {scenery:{id:0, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:0 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:1, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:0 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:2, name:"交通大学", positionLatitude:121.44, positionLongitude:31.208, brief:"景点一的简介", detail:"景点一的详情",type:0 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:3, name:"我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", positionLatitude:121.6007, positionLongitude:31.197, brief:"景点一的简介", detail:"景点一的详情",type:0 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:4, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:1 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:5, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:2 }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1}
+        {scenery:{id:0, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:1, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:2, name:"交通大学", positionLatitude:121.44, positionLongitude:31.208, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.441725,31.208448|121.442479,31.20749|121.443198,31.204587|121.441042,31.203104|121.440503,31.202487|121.439677,31.20261|121.439569,31.203537|121.436658,31.203599|121.436155,31.202672|121.434718,31.202795|121.436191,31.206039|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:3, name:"我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", positionLatitude:121.6007, positionLongitude:31.197, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.601383,31.197201|121.607527,31.198096|121.607958,31.193092|121.60494,31.192474|121.604185,31.19439|121.601994,31.193957|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:4, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:1,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:5, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:2,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1}
 
     ];
   /*[[
@@ -81,7 +82,8 @@ angular.module('app.main-controller', [])
                 track:gItemList[i].track,
                 wishlist:gItemList[i].wishlist,
                 brief:gItemList[i].scenery.brief,
-                detail:gItemList[i].scenery.detail
+                detail:gItemList[i].scenery.detail,
+                border:gItemList[i].scenery.border
             }
             $scope.itemList[j].push(obj);
             
@@ -133,6 +135,7 @@ angular.module('app.main-controller', [])
     //下方标签选择，index表示第几个标签
     $scope.itemClick = function(index) {
             if(marker!=null){marker.hide();}
+            if(polygon!=null){polygon.hide();}
             for(var i = 0; i < markerNearbyList.length; i++){
                 markerNearbyList[i].hide();
             }
@@ -162,6 +165,7 @@ angular.module('app.main-controller', [])
 						geolocation.getCurrentPosition(function(r){   //定位结果对象会传递给r变量
 							if(this.getStatus() == BMAP_STATUS_SUCCESS){
 								if(marker!=null){marker.hide();}
+                                if(polygon!=null){polygon.hide();}
 
                                 var icons = "./img/icon-location.png";
                                 var myicon = new BMap.Icon(icons, new BMap.Size(20, 20));
@@ -242,6 +246,7 @@ angular.module('app.main-controller', [])
     $scope.itemReturn = function(){
     	$scope.getItemList(0);
         if(marker!=null){marker.hide();}
+        if(polygon!=null){polygon.hide();}
     	clickedTab = 0;
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/list";
@@ -405,20 +410,34 @@ angular.module('app.main-controller', [])
 			$scope.map.enableScrollWheelZoom(true);
 
 		}
-<<<<<<< Updated upstream
-=======
+
         for(var i = 0; i < markerNearbyList.length; i++){
             markerNearbyList[i].hide();
         }
->>>>>>> Stashed changes
 		var point = new BMap.Point(item.x, item.y);
 		$scope.map.centerAndZoom(point, 15);
 
 		if(marker!=null){marker.hide();}
+        if(polygon!=null){polygon.hide();}
 		marker = new BMap.Marker(point);
 		$scope.addClickHandler(item.parent, item.index, marker)
 		$scope.map.addOverlay(marker);
 		$scope.selectItem = item;
+
+        var pointList = new Array();
+        var tempStr = item.border;
+        while(tempStr!=''){
+            var x = tempStr.substring(0, tempStr.indexOf(','));
+            var y = tempStr.substring(tempStr.indexOf(',')+1, tempStr.indexOf('|'));
+            var tmppoint = new BMap.Point(x, y);
+            pointList.push(tmppoint);
+            tempStr = tempStr.substring(tempStr.indexOf('|')+1, tempStr.length);
+        }
+        polygon = new BMap.Polygon(pointList, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.2});  //创建多边形
+        $scope.map.addOverlay(polygon);
+
+
+
 		window.location.href = "#/main/overview";
 		var div1 = document.getElementById('info-frame');
 		div1.style.height = "55%";
