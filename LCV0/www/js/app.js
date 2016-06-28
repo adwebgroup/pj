@@ -120,6 +120,14 @@ angular.module('app', ['ionic',
         }
       }
     })
+    .state('main.judgement', {
+      url:"/judgement",
+      views:{
+        'itemlist':{
+          templateUrl: 'templates/items/item-judgement.html'
+        }
+      }
+    })
     .state('main.account-login', {
       url:"/account-login",
       views:{

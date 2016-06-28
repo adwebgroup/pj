@@ -274,6 +274,15 @@ angular.module('app.main-controller', [])
     	window.location.href = "#/main/detail";
     	div1.style.height = "100%";
     }
+
+    //打开评价
+    $scope.openJudgement = function(){
+        var div1 = document.getElementById('info-frame');
+        window.location.href = "#/main/judgement";
+        div1.style.height = "50%";
+    }
+
+
     //点击关闭收起图层候选列表
     $scope.filterClose = function(){
     	var div1 = document.getElementById('filter-frame');
@@ -590,6 +599,18 @@ angular.module('app.main-controller', [])
     }
       //搜索历史景观
       $scope.historyList = [{name:"景点1"},{name:"景点2"}];
+
+    $scope.judgement = function(type){
+        $("#type-1").hide();
+        $("#type-2").hide();
+        $("#type-3").hide();
+        
+        $("#type-"+type).show();
+        
+    }
+
+
+
 
   });
 
