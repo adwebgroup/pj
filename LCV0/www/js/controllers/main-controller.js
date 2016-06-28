@@ -10,15 +10,17 @@ var markerListExist = new Array();
 var markerNearbyList = new Array();
 var marker = null;
 var polygon = null;
+var dragMarker = new Array();
 //var orderState = 0;
+
 var gItemList =
     [
-        {scenery:{id:0, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:1, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:2, name:"交通大学", positionLatitude:121.44, positionLongitude:31.208, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.441725,31.208448|121.442479,31.20749|121.443198,31.204587|121.441042,31.203104|121.440503,31.202487|121.439677,31.20261|121.439569,31.203537|121.436658,31.203599|121.436155,31.202672|121.434718,31.202795|121.436191,31.206039|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:3, name:"我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", positionLatitude:121.6007, positionLongitude:31.197, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.601383,31.197201|121.607527,31.198096|121.607958,31.193092|121.60494,31.192474|121.604185,31.19439|121.601994,31.193957|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:4, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:1,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
-        {scenery:{id:5, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:2,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1}
+        {scenery:{id:0, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|", judgement:"3,6,121.500586,31.305456,不好玩|1,1,121.506479,31.306875,|"}, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:1, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|", judgement:"" }, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:2, name:"交通大学", positionLatitude:121.44, positionLongitude:31.208, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.441725,31.208448|121.442479,31.20749|121.443198,31.204587|121.441042,31.203104|121.440503,31.202487|121.439677,31.20261|121.439569,31.203537|121.436658,31.203599|121.436155,31.202672|121.434718,31.202795|121.436191,31.206039|", judgement:""}, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:3, name:"我是名字超他妈长的景点4啊哈哈哈哈你说我屌不屌啊", positionLatitude:121.6007, positionLongitude:31.197, brief:"景点一的简介", detail:"景点一的详情",type:0,border:"121.601383,31.197201|121.607527,31.198096|121.607958,31.193092|121.60494,31.192474|121.604185,31.19439|121.601994,31.193957|", judgement:""}, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:4, name:"复旦大学", positionLatitude:121.51, positionLongitude:31.302, brief:"景点一的简介", detail:"景点一的详情",type:1,border:"121.501879,31.308448|121.506479,31.306875|121.508311,31.305888|121.51618,31.308016|121.517725,31.304499|121.514312,31.303296|121.515965,31.300488|121.508922,31.294718|121.504143,31.304036|121.500586,31.305456|", judgement:""}, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1},
+        {scenery:{id:5, name:"同济大学", positionLatitude:121.513, positionLongitude:31.288, brief:"景点一的简介", detail:"景点一的详情",type:2,border:"121.506712,31.292675|121.514114,31.290206|121.51106,31.284312|121.508329,31.285392|121.507574,31.284034|121.504053,31.285053|121.504772,31.28675|121.502652,31.28783|121.502939,31.289805|121.50452,31.291441|", judgement:""}, scores:[1,2,0,3,4], collection: 3, track: 2, wishlist:1}
 
     ];
   /*[[
@@ -55,6 +57,10 @@ angular.module('app.main-controller', [])
 
     $scope.transformData = function(gItemList){
         $scope.itemList = new Array();
+        $scope.titleList = [["运动(跑步、骑行、球类)","健身(散步、器械健身)","交往活动","观赏","休息"],["亲近自然","锻炼健身","聚会交友","观察学习","休闲减压"],["增加硬质空间","增加绿色空间","增加设施","改善公共交通","改进步行系统","其他"]];
+
+
+
         for(var i = 0; i < gTypeList.length; i++){
             $scope.itemList[i] = new Array();
             console.log($scope.itemList[i].length);
@@ -83,7 +89,8 @@ angular.module('app.main-controller', [])
                 wishlist:gItemList[i].wishlist,
                 brief:gItemList[i].scenery.brief,
                 detail:gItemList[i].scenery.detail,
-                border:gItemList[i].scenery.border
+                border:gItemList[i].scenery.border,
+                judgement:gItemList[i].scenery.judgement
             }
             $scope.itemList[j].push(obj);
             
@@ -138,6 +145,9 @@ angular.module('app.main-controller', [])
             if(polygon!=null){polygon.hide();}
             for(var i = 0; i < markerNearbyList.length; i++){
                 markerNearbyList[i].hide();
+            }
+            for(var i = 0; i < dragMarker.length;i++){
+                dragMarker[i].hide();
             }
     		var div1 = document.getElementById('info-frame');
     		if(clickedTab == index){
@@ -255,6 +265,9 @@ angular.module('app.main-controller', [])
     }
     //从评论界面返回具体项目
     $scope.commentReturn = function(){
+        for(var i = 0; i < dragMarker.length;i++){
+            dragMarker[i].hide();
+        }
     	var div1 = document.getElementById('info-frame');
     	window.location.href = "#/main/overview";
     	div1.style.height = "55%";
@@ -276,10 +289,51 @@ angular.module('app.main-controller', [])
     }
 
     //打开评价
-    $scope.openJudgement = function(){
+    $scope.openJudgement = function(item){
         var div1 = document.getElementById('info-frame');
         window.location.href = "#/main/judgement";
         div1.style.height = "50%";
+
+        var pointList = new Array();
+        var tempStr = item.judgement;
+        console.log(tempStr);
+        for(var i = 0; i < dragMarker.length;i++){
+            dragMarker[i].hide();
+        }
+        dragMarker = new Array();
+        while(tempStr!=''){
+            var judgementType = tempStr.substring(0, tempStr.indexOf(','));
+            tempStr = tempStr.substring(tempStr.indexOf(',')+1);
+            var judgementOrder = tempStr.substring(0, tempStr.indexOf(','));
+            tempStr = tempStr.substring(tempStr.indexOf(',')+1);
+            var x = tempStr.substring(0, tempStr.indexOf(','));
+            tempStr = tempStr.substring(tempStr.indexOf(',')+1);
+            var y = tempStr.substring(0, tempStr.indexOf(','));
+            var addition = tempStr.substring(tempStr.indexOf(',')+1, tempStr.indexOf('|'));
+            if(addition!=""){
+                addition = "("+addition+")";
+            }
+            var tmppoint = new BMap.Point(x, y);
+            var icons = "./img/type-"+judgementType+"-"+judgementOrder+".png";
+            console.log(icons);
+            console.log(tmppoint);
+            var myicon = new BMap.Icon(icons, new BMap.Size(30, 30));
+            var tmpMarker = new BMap.Marker(tmppoint, {icon: myicon});
+             
+            tmpMarker.setTitle($scope.titleList[judgementType-1][judgementOrder-1]+addition);
+
+            dragMarker.push(tmpMarker);
+            console.log(dragMarker.length);
+            tempStr = tempStr.substring(tempStr.indexOf('|')+1, tempStr.length);
+        }
+        for(var i = 0; i < dragMarker.length;i++){
+            console.log(dragMarker[i]);
+            $scope.map.addOverlay(dragMarker[i]);
+
+        }
+        
+
+
     }
 
 
