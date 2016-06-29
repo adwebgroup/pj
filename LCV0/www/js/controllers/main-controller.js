@@ -293,8 +293,14 @@ angular.module('app.main-controller', [])
         var div1 = document.getElementById('info-frame');
         window.location.href = "#/main/judgement";
         div1.style.height = "50%";
-
+        $scope.showJudgementIcon(item);
         var pointList = new Array();
+        $scope.tmpItem = item;
+        
+    }
+
+    //获取Icon并显示
+    $scope.showJudgementIcon = function(item){
         var tempStr = item.judgement;
         console.log(tempStr);
         for(var i = 0; i < dragMarker.length;i++){
@@ -315,8 +321,7 @@ angular.module('app.main-controller', [])
             }
             var tmppoint = new BMap.Point(x, y);
             var icons = "./img/type-"+judgementType+"-"+judgementOrder+".png";
-            console.log(icons);
-            console.log(tmppoint);
+            
             var myicon = new BMap.Icon(icons, new BMap.Size(30, 30));
             var tmpMarker = new BMap.Marker(tmppoint, {icon: myicon});
              
@@ -329,13 +334,22 @@ angular.module('app.main-controller', [])
         for(var i = 0; i < dragMarker.length;i++){
             console.log(dragMarker[i]);
             $scope.map.addOverlay(dragMarker[i]);
-
         }
-        
-
-
     }
 
+    //点击ICON开始拖动,typeSelected和orderSelected指出被选中的Icon，都为0表示未选择。
+    $scope.typeSelected = 0;
+    $scope.orderSelected = 0;
+    $scope.pressIcon = function(type, order){
+        if($scope.typeSelected != 0){
+            document.getElementById("type-"+$scope.typeSelected+"-"+$scope.orderSelected).style.backgroundColor = "transparent";
+
+        }
+        document.getElementById("type-"+type+"-"+order).style.backgroundColor = "#eee";
+        $scope.typeSelected = type;
+        $scope.orderSelected = order;
+
+    }
 
     //点击关闭收起图层候选列表
     $scope.filterClose = function(){
@@ -464,7 +478,7 @@ angular.module('app.main-controller', [])
     }
 
 
-
+    
     //显示项目并在地图上显示标记，item为一个项目的对象
 	$scope.showItem = function(item){
 		//var map = new BMap.Map('baidu-map-api');
@@ -497,6 +511,53 @@ angular.module('app.main-controller', [])
             tempStr = tempStr.substring(tempStr.indexOf('|')+1, tempStr.length);
         }
         polygon = new BMap.Polygon(pointList, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.2});  //创建多边形
+
+        polygon.addEventListener("click",function(e){
+            if($scope.typeSelected>0){
+                document.getElementById("type-"+$scope.typeSelected+"-"+$scope.orderSelected).style.backgroundColor = "transparent";
+                //alert(e.point.lng+":"+e.point.lat);
+                
+                var addition = "";
+                if ($scope.typeSelected == 3){
+                    if($scope.orderSelected == 3){
+                        addition = document.getElementById("input-infrastructure").value;
+                    }
+                    if($scope.orderSelected == 6){
+                        addition = document.getElementById("input-others").value;
+                    }
+                } 
+                for (var i = 0; i < $scope.itemList.length; i++) {
+                    for (var j = 0; j < $scope.itemList[i].length; j++) {
+                        if($scope.itemList[i][j].id==$scope.tmpItem.id){
+                            //alert(i+""+j);
+                            $scope.itemList[i][j].judgement += $scope.typeSelected+","+$scope.orderSelected+","+e.point.lng+","+e.point.lat+","+addition+"|";
+//////////////////////////更新数据库                            
+                        }
+                    }
+                    
+                }
+
+
+                $scope.tmpItem.judgement += $scope.typeSelected+","+$scope.orderSelected+","+e.point.lng+","+e.point.lat+","+addition+"|";
+                $scope.showJudgementIcon($scope.tmpItem);
+                $scope.typeSelected = 0;
+                $scope.orderSelected = 0;
+                /*var tmppoint = new BMap.Point(e.point.lng, e.point.lat);
+                var icons = "./img/type-"+$scope.typeSelected+"-"+$scope.orderSelected+".png";
+            
+                var myicon = new BMap.Icon(icons, new BMap.Size(30, 30));
+                var tmpMarker = new BMap.Marker(tmppoint, {icon: myicon});
+             
+                tmpMarker.setTitle($scope.titleList[$scope.typeSelected-1][$scope.orderSelected-1]);
+
+                $scope.map.addOverlay(tmpMarker);*/
+                document.getElementById("input-infrastructure").value = "";
+                document.getElementById("input-others").value = "";
+            }
+            
+            //alert(e.point.lng+":"+e.point.lat);
+        });
+
         $scope.map.addOverlay(polygon);
 
 
