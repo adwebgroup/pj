@@ -80,3 +80,11 @@ ion-nav-view, body, .pane{
 	right: 0;
 	position: absolute;
 }
+
+#route-search{
+	display: none;
+}
+
+#route-search > label{
+	margin: 0 10px;
+}

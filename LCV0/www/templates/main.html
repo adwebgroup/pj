@@ -3,12 +3,25 @@
     <button class="button button-icon icon ion-navicon" ng-click="leftSide()"></button>
     <h1 class="title">城市景观大众点评</h1>
   </ion-header-bar>
-  <div class="bar bar-positive item-input-inset search-frame">
+  <div id="default-search" class="bar bar-positive item-input-inset search-frame">
     <label class="item-input-wrapper">
       <i class="icon ion-ios-search placeholder-icon"></i>
       <input ng-model="searchStr" type="search" placeholder="搜索"/>
     </label>
     <button class="button button-clear" ng-click="searchItem(searchStr)">
+      搜索
+    </button>
+  </div>
+  <div id="route-search" class="bar bar-positive item-input-inset search-frame">
+    从
+    <label class="item-input-wrapper">
+      <input ng-model="searchFromStr" type="search" placeholder="搜索"/>
+    </label>
+    到
+    <label class="item-input-wrapper">
+      <input ng-model="searchToStr" type="search" placeholder="搜索"/>
+    </label>
+    <button class="button button-clear" ng-click="searchRoute(searchFromStr, searchToStr)">
       搜索
     </button>
   </div>

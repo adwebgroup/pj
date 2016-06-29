@@ -57,6 +57,10 @@ angular.module('app.main-controller', [])
 
     $scope.transformData = function(gItemList){
         $scope.itemList = new Array();
+        $scope.driving = null;
+        $scope.searchStr ="";
+        $scope.searchFormStr ="";
+        $scope.searchToStr ="";
         $scope.titleList = [["运动(跑步、骑行、球类)","健身(散步、器械健身)","交往活动","观赏","休息"],["亲近自然","锻炼健身","聚会交友","观察学习","休闲减压"],["增加硬质空间","增加绿色空间","增加设施","改善公共交通","改进步行系统","其他"]];
 
 
@@ -141,8 +145,15 @@ angular.module('app.main-controller', [])
     };
     //下方标签选择，index表示第几个标签
     $scope.itemClick = function(index) {
+            document.getElementById("route-search").style.display = "none";
+            document.getElementById("default-search").style.display = "flex";
             if(marker!=null){marker.hide();}
             if(polygon!=null){polygon.hide();}
+            if($scope.driving!=null){
+                $scope.driving=null;
+                $scope.map.clearOverlays();
+                
+            }
             for(var i = 0; i < markerNearbyList.length; i++){
                 markerNearbyList[i].hide();
             }
@@ -198,6 +209,11 @@ angular.module('app.main-controller', [])
     					window.location.href = "#/main/history";
     					div1.style.height = "100%";
     					break;
+                    case 3:
+                        document.getElementById("route-search").style.display = "flex";
+                        document.getElementById("default-search").style.display = "none";
+                        div1.style.height = "0";
+                        break;
     				case 4:
     					window.location.href = "#/main/account-login";
     					div1.style.height = "100%";
@@ -700,15 +716,65 @@ angular.module('app.main-controller', [])
             }
         }
         if(!t){
-            $scope.showAlert(itemStr);
+            $scope.showAlert('找不到“'+itemStr+'”');
         }
     }
+
+    //搜索路径
+    $scope.searchRoute = function(fromStr, toStr){
+        var fromItem = null;
+        var toItem = null;
+        for(var i = 0; i < $scope.itemList.length; i++){
+            for(var j = 0; j < $scope.itemList[i].length; j++){
+                if(fromStr == $scope.itemList[i][j].text){
+                    fromItem = $scope.itemList[i][j];
+                    break;
+                }
+            }
+        }
+        for(var i = 0; i < $scope.itemList.length; i++){
+            for(var j = 0; j < $scope.itemList[i].length; j++){
+                if(toStr == $scope.itemList[i][j].text){
+                    toItem = $scope.itemList[i][j];
+                    break;
+                }
+            }
+        }
+        if(fromItem!=null&&toItem!=null&&fromItem!=toItem){
+            if($scope.map==null){
+                $scope.map = new BMap.Map('baidu-map-api', {enableMapClick:false});
+                $scope.map.enableScrollWheelZoom(true);
+                var point = new BMap.Point(121.5, 31.3);
+                $scope.map.centerAndZoom(point, 12);
+            }
+            for(var i = 0; i < $scope.typeList.length; i++){
+                $scope.typeList[i].checked = true;
+                $scope.showMarkers($scope.typeList[i]);
+            }
+            var p1 = new BMap.Point(fromItem.x,fromItem.y);
+            var p2 = new BMap.Point(toItem.x,toItem.y);
+            $scope.driving = new BMap.DrivingRoute($scope.map, {renderOptions:{map: $scope.map, autoViewport: true}});
+            $scope.driving.search(p1, p2);
+            //$scope.showAlert(fromStr);
+            
+        }
+        if(fromItem==null){
+            $scope.showAlert('找不到“'+fromStr+'”');
+        }else if(toItem==null){
+            $scope.showAlert('找不到“'+toStr+'”');
+        }else if(fromItem==toItem){
+            $scope.showAlert('起点和终点不能相同！');
+        }
+    }
+
+
+
 
     // 一个提示对话框
     $scope.showAlert = function(itemStr) {
         var alertPopup = $ionicPopup.alert({
             title: '抱歉',
-            template: '找不到“'+itemStr+'”'
+            template: itemStr
         });
 
     }
