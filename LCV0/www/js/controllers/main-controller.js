@@ -152,8 +152,10 @@ angular.module('app.main-controller', [])
             if($scope.driving!=null){
                 $scope.driving=null;
                 $scope.map.clearOverlays();
-                
+                $scope.searchFormStr ="";
+                $scope.searchToStr ="";
             }
+
             for(var i = 0; i < markerNearbyList.length; i++){
                 markerNearbyList[i].hide();
             }
@@ -790,7 +792,11 @@ angular.module('app.main-controller', [])
         
     }
 
-
+    //到这去
+    $scope.goHere = function(itemName){
+        $scope.itemClick(3);
+        $scope.searchToStr =itemName;
+    }
 
 
   });
